@@ -2,38 +2,67 @@ package at.edu.hti.st.pathfinder;
 
 public class SimplePathFinder extends AbstractPathFinder {
 
-	private int[][] wM;
+    private boolean[][] visited;
 
-	@Override
-	public void wrritePathToConsole(int[][] wMatrix) {
-		this.wM = wMatrix;
-		calculate(0, 0, Directions.START);
-	}
+    @Override
+    public void wrritePathToConsole() {
+        if (matrix == null) {
+            System.err.println("No input available!");
+        }
+        initVisited();
+        calculate(new IndexPair(0, 0), null, Directions.START);
+    }
 
-	private int calculate(int i, int j, Directions direction) {
-		if (i == wM.length && j == wM[wM.length].length)
-			return wM[i][j];
+    private void initVisited() {
+        int maxM = matrix.length;
+        int maxN = matrix[0].length;
+        visited = new boolean[maxM][maxN]; // implicit initialized with false
+    }
 
-		switch (direction) {
-		case START:
+    private int calculate(IndexPair index, IndexPair preIndex, Directions direction) {
+        visited[index.getI()][index.getJ()] = true;
+        int rigth, left, down, up;
 
-			break;
+        // right
+        if ((index.j + 1 < matrix[0].length) & !(visited[index.i][index.j + 1])
+                & !(index.i == preIndex.i & index.j + 1 == preIndex.j)) {
+            rigth = calculate(new IndexPair(index.i, index.j + 1), index, Directions.FROM_LEFT);
+        }
 
-		case FROM_LEFT:
+        // left
 
-			break;
-		case FROM_TOP:
-			break;
-		case FROM_RIGTH:
-			break;
-		case FROM_BOTTOM:
-			break;
+        // down
 
-		default:
-			System.out.println("Unknown from where we are coming");
-		}
+        // up
 
-		return -1;
-	}
+        IndexPair up = new IndexPair(index.i - 1, index.j);
+        IndexPair down = new IndexPair(index.i + 1, index.j);
+
+        visited[index.getI()][index.getJ()] = false;
+        return -1; // TODO has to be defined
+    }
+
+    private class IndexPair {
+        private int i;
+        private int j;
+
+        public IndexPair(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        public void set(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        public int getI() {
+            return i;
+        }
+
+        public int getJ() {
+            return j;
+        }
+    }
 
 }
