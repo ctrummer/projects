@@ -21,7 +21,7 @@ public class SimplePathFinder extends AbstractPathFinder {
 
     private int calculate(IndexPair index, IndexPair preIndex, Directions direction) {
         visited[index.getI()][index.getJ()] = true;
-        int rigth, left, down, up;
+        int rigth, left;
 
         // right
         if ((index.j + 1 < matrix[0].length) & !(visited[index.i][index.j + 1])

@@ -12,7 +12,7 @@ public class Matrix<T> {
 
     public Matrix(T[][] matrix) {
         // this.matrix = matrix;
-        System.out.println("Matrix is of type: " + this.matrix.getClass());
+        System.out.println("Matrix is of type: " + this.getClass());
     }
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/Users/ctrummer/programme/eclipse/plugins/org.eclipse.osgi_3.8.1.v20120830-144521.jar" sourcepath="/Users/ctrummer/programme/eclipse/plugins/org.eclipse.osgi_3.8.1.v20120830-144521.jar"/>
 	<classpathentry kind="lib" path="/Users/ctrummer/programme/eclipse/plugins/org.eclipse.core.commands_3.6.1.v20120814-150512.jar" sourcepath="/Users/ctrummer/programme/eclipse/plugins/org.eclipse.core.commands_3.6.1.v20120814-150512.jar"/>
@@ -32,5 +33,7 @@
 	<classpathentry kind="lib" path="/Users/ctrummer/programme/derby/lib/derbynet.jar"/>
 	<classpathentry kind="lib" path="/Users/ctrummer/programme/derby/lib/derbyrun.jar"/>
 	<classpathentry kind="lib" path="/Users/ctrummer/programme/derby/lib/derbytools.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
