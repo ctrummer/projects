@@ -21,6 +21,7 @@ public class TrialSimplex {
   private int numberOfLocations;
   private int numberOfPblLines;
   private int numberOfLocationsPerPblLine;
+  private int[] pickAmount;
 
   public static void main(String[] args) throws Exception {
     TrialSimplex trial = new TrialSimplex(10, 5, 15);
@@ -37,6 +38,7 @@ public class TrialSimplex {
     this.numberOfLocations = numberOfPblLines * numberOfLocationsPerPblLine;
     this.numberOfPblLines = numberOfPblLines;
     this.numberOfLocationsPerPblLine = numberOfLocationsPerPblLine;
+    this.pickAmount = createExpectedPicksPerSku();
   }
 
   public void testMath272() {
@@ -57,25 +59,11 @@ public class TrialSimplex {
     Assert.assertEquals(3.0, solution.getValue(), .0000001);
   }
 
-  /**
-   * 1..m SKUs 1..n Locations xi for 1 <= i <= m*n
-   */
-
-  //  private void restriction() {
-  //    Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
-  //    constraints.add(new LinearConstraint(new double[] {1, 1, 0}, Relationship.GEQ, 1));
-  //
-  //  }
-
-  private int calculateIndex(int skuIndex, int locationIndex) {
-    return ((skuIndex - 1) * numberOfLocations + locationIndex) - 1;
-  }
-
   private Collection<LinearConstraint> createRestrictionOneSKUperLocation() {
     Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
     double[] vector;
     for (int locationIndex = 1; locationIndex <= numberOfLocations; locationIndex++) {
-      vector = createVector(numberOfProducts * numberOfLocations);
+      vector = createVector(numberOfProducts * numberOfLocations - 1);
       for (int skuIndex = 1; skuIndex <= numberOfProducts; skuIndex++) {
         vector[calculateIndex(skuIndex, locationIndex)] = 1.0;
       }
@@ -88,7 +76,7 @@ public class TrialSimplex {
     Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
     double[] vector;
     for (int skuIndex = 1; skuIndex <= numberOfProducts; skuIndex++) {
-      vector = createVector(numberOfProducts * numberOfLocations);
+      vector = createVector(numberOfProducts * numberOfLocations - 1);
       for (int locationIndex = 1; locationIndex <= numberOfLocations; locationIndex++) {
         vector[calculateIndex(skuIndex, locationIndex)] = 1.0;
       }
@@ -103,6 +91,33 @@ public class TrialSimplex {
     // costs for moving in
     // costs for moving out
 
+    double[] vector = createVector(numberOfProducts * numberOfLocations);
+    for (int skuIndex = 1; skuIndex <= numberOfProducts; skuIndex++) {
+
+    }
+
+    LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] {2, 2, 1}, 0);
+
+    return null;
+  }
+
+  private int[] createExpectedPicksPerSku() {
+    int[] pickAmounts = new int[numberOfProducts];
+    for (int index = 0; index < numberOfProducts; index++) {
+      pickAmounts[index] = numberOfProducts - index;
+    }
+    return pickAmounts;
+  }
+
+  private double calculatePickEffort(int PblLine, int PblLocationInLine) {
+    int relLine = Math.abs(PblLine - (numberOfPblLines / 2));
+    int relLoc = Math.abs(PblLocationInLine - (numberOfLocations / 2));
+
+    return relLine + relLoc;
+  }
+
+  private int calculateIndex(int skuIndex, int locationIndex) {
+    return ((skuIndex - 1) * numberOfLocations + locationIndex) - 1;
   }
 
   private double[] createVector(int size) {
@@ -123,7 +138,3 @@ public class TrialSimplex {
   }
 
 }
-
-//---------------------------- Revision History ----------------------------
-//$Log$
-//
