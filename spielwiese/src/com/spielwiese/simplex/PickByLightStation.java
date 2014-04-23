@@ -1,13 +1,11 @@
 
 package com.spielwiese.simplex;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
-
+import org.apache.log4j.Logger;
 
 public class PickByLightStation {
 
-  private static final ILogger LOG = LogHelper.getLogger();
+  static Logger logger = Logger.getLogger(PickByLightStation.class);
   
   private final int numberOfLines;
   private final int numberOfLocationsPerLine;
@@ -28,9 +26,6 @@ public class PickByLightStation {
   
   public int getPlaceNumber(int lineNr, int column) {
     throw new RuntimeException("Not implemented yet!");
-    int placeNumber = (lineNr-1)
-    
-    return null;
   }
   
   

@@ -1,29 +1,28 @@
-
 package com.spielwiese.simplex;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
+import org.apache.commons.math.ode.FirstOrderDifferentialEquations;
+import org.apache.commons.math.ode.FirstOrderIntegrator;
+import org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegrator;
+import org.apache.commons.math.optimization.GoalType;
+import org.apache.commons.math.optimization.RealPointValuePair;
+import org.apache.commons.math.optimization.linear.LinearConstraint;
+import org.apache.commons.math.optimization.linear.LinearObjectiveFunction;
+import org.apache.commons.math.optimization.linear.Relationship;
+import org.apache.commons.math.optimization.linear.SimplexSolver;
+ 
+import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class trial2 {
 
-  private static final ILogger LOG = LogHelper.getLogger();
+  static Logger logger = Logger.getLogger(trial2.class);
   
   
   
-  import org.apache.commons.math.ode.FirstOrderDifferentialEquations;
-  import org.apache.commons.math.ode.FirstOrderIntegrator;
-  import org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegrator;
-  import org.apache.commons.math.optimization.GoalType;
-  import org.apache.commons.math.optimization.RealPointValuePair;
-  import org.apache.commons.math.optimization.linear.LinearConstraint;
-  import org.apache.commons.math.optimization.linear.LinearObjectiveFunction;
-  import org.apache.commons.math.optimization.linear.Relationship;
-  import org.apache.commons.math.optimization.linear.SimplexSolver;
-   
-  import java.util.ArrayList;
-  import java.util.Arrays;
-  import java.util.Collection;
+
    
   public class Main {
    
@@ -81,6 +80,58 @@ public class trial2 {
   }
   }
 
+  
+  
+  
+//public void trialSimplex() {
+//  
+//  // non-linear (???)
+//  // SimplexOptimizer optimizer = new SimplexOptimizer(0, 0);
+//  // optimizer.optimize(optData)
+//  
+//  
+//  // linear (!!!)
+//  SimplexSolver solver = new SimplexSolver();
+//  LinearConstraint constraints = null; // new LinearConstraint(null, null, 0);
+//  OptimizationData optData = new LinearConstraintSet(constraints );
+//  solver.optimize(optData);
+//  
+//  
+//  
+//  
+//  
+//  
+//}
+
+//public void trialExample() {
+//// describe the optimization problem
+//  LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { -2, 1 }, -5);
+//  Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+//  constraints.add(new LinearConstraint(new double[] { 1, 2 }, Relationship.LEQ, 6));
+//  constraints.add(new LinearConstraint(new double[] { 3, 2 }, Relationship.LEQ, 12));
+//  constraints.add(new LinearConstraint(new double[] { 0, 1 }, Relationship.GEQ, 0));
+//  
+//  OptimizationData optData = new LinearConstraintSet(constraints );
+//
+//  // create and run the solver
+//  new SimplexSolver().optimize(optData);
+//  PointValuePair solution = new SimplexSolver().optimize(optData);
+////  RealPointValuePair solution = new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);
+//  
+//
+//  // get the solution
+//  double x = solution.getPoint()[0];
+//  double y = solution.getPoint()[1];
+//  double min = solution.getValue();
+//  
+//}
+
+
+  
+  
+  
+  
+  
 }
 
 

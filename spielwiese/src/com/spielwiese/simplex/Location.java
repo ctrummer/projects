@@ -1,14 +1,14 @@
 
 package com.spielwiese.simplex;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
+import org.apache.log4j.Logger;
+
+
 
 
 public class Location {
 
-  private static final ILogger LOG = LogHelper.getLogger();
-
+  static Logger logger = Logger.getLogger(Location.class);
 }
 
 

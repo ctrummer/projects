@@ -8,64 +8,31 @@ import org.apache.commons.math3.optim.OptimizationData;
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.*;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
-
 public class TrialSimplex {
-
-  private static final ILogger LOG = LogHelper.getLogger();
   
+  static Logger logger = Logger.getLogger(TrialSimplex.class);
   
-  
-//  public void trialSimplex() {
-//    
-//    // non-linear (???)
-//    // SimplexOptimizer optimizer = new SimplexOptimizer(0, 0);
-//    // optimizer.optimize(optData)
-//    
-//    
-//    // linear (!!!)
-//    SimplexSolver solver = new SimplexSolver();
-//    LinearConstraint constraints = null; // new LinearConstraint(null, null, 0);
-//    OptimizationData optData = new LinearConstraintSet(constraints );
-//    solver.optimize(optData);
-//    
-//    
-//    
-//    
-//    
-//    
-//  }
-  
-//  public void trialExample() {
-// // describe the optimization problem
-//    LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { -2, 1 }, -5);
-//    Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
-//    constraints.add(new LinearConstraint(new double[] { 1, 2 }, Relationship.LEQ, 6));
-//    constraints.add(new LinearConstraint(new double[] { 3, 2 }, Relationship.LEQ, 12));
-//    constraints.add(new LinearConstraint(new double[] { 0, 1 }, Relationship.GEQ, 0));
-//    
-//    OptimizationData optData = new LinearConstraintSet(constraints );
-//
-//    // create and run the solver
-//    new SimplexSolver().optimize(optData);
-//    PointValuePair solution = new SimplexSolver().optimize(optData);
-////    RealPointValuePair solution = new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);
-//    
-//
-//    // get the solution
-//    double x = solution.getPoint()[0];
-//    double y = solution.getPoint()[1];
-//    double min = solution.getValue();
-//    
-//  }
+  private int numberOfProducts;
+  private int numberOfLocations;
+  private int numberOfPblLines;
+  private int numberOfLocationsPerPblLine;
   
   public static void main(String[] args) throws Exception { 
-    TrialSimplex trial = new TrialSimplex();
+    TrialSimplex trial = new TrialSimplex(10,5,15);
     trial.testMath272();
+    trial.createVector();
   }
+
+  public TrialSimplex(int numberOfProducts, int numberOfPblLines, int numberOfLocationsPerPblLine) {
+    this.numberOfProducts = numberOfProducts;
+    this.numberOfLocations = numberOfPblLines * numberOfLocationsPerPblLine;
+    this.numberOfPblLines = numberOfPblLines;
+    this.numberOfLocationsPerPblLine = numberOfLocationsPerPblLine;
+  }
+
   
   public void testMath272() {
     LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { 2, 2, 1 }, 0);
@@ -93,8 +60,29 @@ public class TrialSimplex {
  *   
  */
   
+  private void restriction() {
+    Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+    constraints.add(new LinearConstraint(new double[] { 1, 1, 0 }, Relationship.GEQ,  1));
+    
+    
+  }
   
-  private void restrictions
+  private double[] createVector() {
+    int size = numberOfProducts * numberOfLocations;
+    double[] vector = new double[size];
+    logger.info("vector initial is: " + vectorToString(vector));
+    
+    
+    return vector;
+  }
+  
+  private String vectorToString(double vector[]) {
+    String textString = ""; // FIXME StringBuffer
+    for (int index = 0; index < vector.length; index++) {
+      textString += " " + index + " " + " == " + " " + vector[index];
+    }
+    return textString;
+  }
   
  
 

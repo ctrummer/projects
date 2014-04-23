@@ -3,50 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/pcs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/java"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/gui"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/adapter"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/mfs"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/aqapi.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/jms.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/jta.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/findbugs/annotations.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/findbugs/jsr305.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/ucp.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/scheduling/quartz-2.0.1/quartz-all-2.0.1.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/comm.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/bsh-2.0b4.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/adfshare.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/bc4jct.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/bc4jdomorcl.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/bc4jmt.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/collections.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/jdev-cm.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/jsp-el-api.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/ocrs12.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/ojmisc.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/orai18n.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/adf/xmlparserv2.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/mq/com.ibm.mqjms.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/jcommon-0.9.6.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/jfreechart-0.9.21.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/testing/junit/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/testing/junit/hamcrest-all-1.3.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/io/xml/dom4j-full.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/guava/guava.jar" sourcepath="/buildLib/thirdParty/guava/guava-sources.jar">
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/testing/junit/junit-4.11.jar" sourcepath="/buildLib/thirdParty/testing/junit/junit-4.11-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/buildLib/thirdParty/guava/guava-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="file:/C:/Users/ctr/git/projects/spielwiese/lib/testing/junit/junit-4.11-javadoc"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/beansbinding/beansbinding-1.2.1.jar" sourcepath="/buildLib/thirdParty/beansbinding/beansbinding-1.2.1-sources.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/io/json/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/testing/mocking/mockito/mockito-all-1.9.5-sources.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/testing/mocking/mockito/mockito-all-1.9.5.jar"/>
-	<classpathentry kind="lib" path="/buildLib/thirdParty/testing/mocking/powermock/powermock-mockito-1.5-full.jar"/>
+	<classpathentry kind="lib" path="lib/testing/mocking/mockito/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/commons-math3-3.2/commons-math3-3.2.jar" sourcepath="lib/commons-math3-3.2/commons-math3-3.2-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/Users/ctr/Documents/workspaces/WAMAS-C-HEAD/spielwiese/lib/commons-math3-3.2/docs/apidocs/"/>
