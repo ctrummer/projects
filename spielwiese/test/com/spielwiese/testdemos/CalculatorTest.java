@@ -8,13 +8,16 @@
  *
  */
 
-package com.spielwiese.trial;
+package com.spielwiese.testdemos;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import org.junit.AfterClass;
 import org.junit.Test;
+
+import com.spielwiese.trial.Calculator;
+import com.spielwiese.trial.DummyContainer;
 
 
 /**

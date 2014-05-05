@@ -1,5 +1,5 @@
 
-package com.trummer.demo;
+package com.testdemos;
 
 import com.ssp.common.logging.ILogger;
 import com.ssp.common.logging.LogHelper;

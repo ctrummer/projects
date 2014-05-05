@@ -7,13 +7,15 @@
  *
  */
 
-package com.spielwiese.trial;
+package com.spielwiese.testdemos;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.spielwiese.trial.Converter;
 
 /**
  * This is the class header. The first sentence (ending with "."+SPACE) is important,
