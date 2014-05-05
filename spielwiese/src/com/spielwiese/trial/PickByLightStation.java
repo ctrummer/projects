@@ -1,5 +1,5 @@
 
-package com.spielwiese.simplex;
+package com.spielwiese.trial;
 
 import org.apache.log4j.Logger;
 

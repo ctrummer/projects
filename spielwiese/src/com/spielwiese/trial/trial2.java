@@ -1,4 +1,4 @@
-package com.spielwiese.simplex;
+package com.spielwiese.trial;
 
 import org.apache.commons.math.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math.ode.FirstOrderIntegrator;

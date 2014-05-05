@@ -1,11 +1,11 @@
-package com.spielwiese.simplex;
+package com.spielwiese.trial;
 
 import org.apache.log4j.Logger;
 
-public class Index {
+public class StockKeepingUnit {
 
-  static Logger logger = Logger.getLogger(Index.class);
-  
+  static Logger logger = Logger.getLogger(StockKeepingUnit.class);
+
 }
 
 
