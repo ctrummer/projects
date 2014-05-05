@@ -14,6 +14,11 @@ public class TrialSimplexUtilTest {
     this.helper = helper;
   }
 
+  // TODO move to JUnit test
+  //    TrialSimplexUtilTest test = new TrialSimplexUtilTest(helper);
+  //    test.testIndexCalculation();
+  //    test.testPickEffort();
+
   public void testPickEffort() {
     for (int index = 0; index < helper.getNumberOfLocations(); index++) {
       logger.info("index == " + index + " line == " + helper.calculatePblLine(index) + " column == " + helper.calculatePblColumn(index) + " effort == "

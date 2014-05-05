@@ -1,6 +1,8 @@
 
 package com.spielwiese.simplex;
 
+import java.util.Date;
+
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.log4j.Logger;
 
@@ -8,11 +10,11 @@ public class TrialSimplexUtil {
 
   static Logger logger = Logger.getLogger(TrialSimplexUtil.class);
 
-  int numberOfSKUs;
-  int numberOfLocations;
-  int numberOfPblLines;
-  int numberOfPblLocationsPerLine;
-  int[] pickAmount;
+  private int numberOfSKUs;
+  private int numberOfLocations;
+  private int numberOfPblLines;
+  private int numberOfPblLocationsPerLine;
+  private int[] pickAmount;
 
   public TrialSimplexUtil(int numberOfSKUs, int numberOfPblLines, int numberOfPblLocationsPerLine) {
     this.numberOfSKUs = numberOfSKUs;
@@ -72,7 +74,7 @@ public class TrialSimplexUtil {
     return pickAmounts;
   }
 
-  public void logResult(PointValuePair solution) {
+  public void logResult(PointValuePair solution, Date start, Date stop) {
     TrialSimplex.logger.info(solution);
     Double solutionValue = solution.getValue();
     double[] solutionKey = solution.getKey();
@@ -84,6 +86,13 @@ public class TrialSimplexUtil {
       }
     }
     TrialSimplex.logger.info("Solution Value == " + solutionValue);
+
+    logger.info("Calculation time ==  " + (stop.getTime() - start.getTime()));
+    logger.info("SKUs == " + getNumberOfSKUs());
+    logger.info("PBL Lines == " + getNumberOfPblLines());
+    logger.info("Locations per line == " + getNumberOfPblLocationsPerLine());
+    logger.info("Total locations ==  " + getNumberOfLocations());
+
   }
 
   public int getNumberOfSKUs() {

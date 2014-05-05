@@ -3,6 +3,7 @@ package com.spielwiese.simplex;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.LinearConstraint;
@@ -20,18 +21,12 @@ public class TrialSimplex {
   TrialSimplexUtil helper;
 
   public static void main(String[] args) throws Exception {
-    TrialSimplex trial = new TrialSimplex(15, 3, 5);
+    TrialSimplex trial = new TrialSimplex(21, 3, 7);
     trial.optimizePblStationSlotting();
   }
 
   public TrialSimplex(int numberOfSKUs, int numberOfPblLines, int numberOfLocationsPerPblLine) {
     helper = new TrialSimplexUtil(numberOfSKUs, numberOfPblLines, numberOfLocationsPerPblLine);
-
-    // TODO move to JUnit test
-    TrialSimplexUtilTest test = new TrialSimplexUtilTest(helper);
-    test.testIndexCalculation();
-    test.testPickEffort();
-
   }
 
   public void optimizePblStationSlotting() {
@@ -44,9 +39,12 @@ public class TrialSimplex {
     NonNegativeConstraint nonNegativeConstraint = new NonNegativeConstraint(true);
 
     SimplexSolver solver = new SimplexSolver();
-    PointValuePair solution = solver.optimize(objectiveFunction, set, nonNegativeConstraint);
 
-    helper.logResult(solution);
+    Date start = new Date();
+    PointValuePair solution = solver.optimize(objectiveFunction, set, nonNegativeConstraint);
+    Date stop = new Date();
+
+    helper.logResult(solution, start, stop);
 
   }
 
