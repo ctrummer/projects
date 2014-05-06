@@ -2,7 +2,8 @@
 package com.spielwiese.simplex;
 
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TrialSimplexUtilTest {
 
@@ -10,41 +11,52 @@ public class TrialSimplexUtilTest {
 
   TrialSimplexUtil helper;
 
-  public TrialSimplexUtilTest(TrialSimplexUtil helper) {
-    this.helper = helper;
+  public void testInit() {
+    helper = new TrialSimplexUtil(15, 3, 15);
   }
 
-  // TODO move to JUnit test
-  //    TrialSimplexUtilTest test = new TrialSimplexUtilTest(helper);
-  //    test.testIndexCalculation();
-  //    test.testPickEffort();
-
+  @Test
   public void testPickEffort() {
+    testInit();
+
     for (int index = 0; index < helper.getNumberOfLocations(); index++) {
-      logger.info("index == " + index + " line == " + helper.calculatePblLine(index) + " column == " + helper.calculatePblColumn(index) + " effort == "
-        + helper.calculatePickEffort(index));
+      logger.info("index == " + index + " line == " + helper.calcPblLine(index) //
+        + " column == " + helper.calcPblColumn(index) + " effort == " + helper.calculatePickEffort(index));
 
     }
   }
 
-  public void testIndexCalculation() {
+  @Test
+  public void testVectorIndexHandling() {
+    testInit();
 
     for (int skuIndex = 1; skuIndex <= helper.getNumberOfSKUs(); skuIndex++) {
       for (int locationIndex = 1; locationIndex <= helper.getNumberOfLocations(); locationIndex++) {
-        int index = helper.calculateIndex(skuIndex, locationIndex);
-        logger.info("skuIndex == " + skuIndex + " locationIndex == " + locationIndex + " index == " + index + " " + "skuIndexCalc == "
-          + helper.calculateProduct(index) + " locationIndex == " + helper.calculateLocation(index));
+        int index = helper.calculateIndexFromSkuLocation(skuIndex, locationIndex);
+
+        Assert.assertEquals(skuIndex, helper.calculateSkuFromIndex(index));
+        Assert.assertEquals(locationIndex, helper.calculateLocationFromIndex(index));
       }
     }
-
   }
 
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  @Test
+  public void testPblIndexHandling() {
+    testInit();
+
+    for (int lineIndex = 1; lineIndex <= helper.getNumberOfPblLines(); lineIndex++) {
+      for (int columnIndex = 1; columnIndex <= helper.getNumberOfPblLocationsPerLine(); columnIndex++) {
+
+        int pblIndex = helper.calcPblLocationIndex(lineIndex, columnIndex);
+        Assert.assertEquals(lineIndex, helper.calcPblLine(pblIndex));
+        Assert.assertEquals(columnIndex, helper.calcPblColumn(pblIndex));
+      }
+    }
   }
 
+  // Pick Effort
+
+  // Pick Amount
+
+  // creation empty Vector
 }
-
-//---------------------------- Revision History ----------------------------
-//$Log$
-//

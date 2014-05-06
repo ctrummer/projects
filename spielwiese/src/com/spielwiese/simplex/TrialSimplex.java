@@ -56,8 +56,8 @@ public class TrialSimplex {
     double[] vector = TrialSimplexUtil.createVector(helper.getNumberOfSKUs() * helper.getNumberOfLocations());
     for (int skuIndex = 1; skuIndex <= helper.getNumberOfSKUs(); skuIndex++) {
       for (int locationIndex = 1; locationIndex <= helper.getNumberOfLocations(); locationIndex++) {
-        double value = helper.getPickAmountPerSKU()[skuIndex - 1] * helper.calculatePickEffort(locationIndex);
-        vector[helper.calculateIndex(skuIndex, locationIndex)] = value;
+        double value = helper.getPickAmountPerSKU()[skuIndex - 1] * helper.calculatePickEffort(locationIndex - 1);
+        vector[helper.calculateIndexFromSkuLocation(skuIndex, locationIndex)] = value;
       }
     }
 
@@ -72,7 +72,7 @@ public class TrialSimplex {
     for (int locationIndex = 1; locationIndex <= helper.getNumberOfLocations(); locationIndex++) {
       vectorUpperLimit = TrialSimplexUtil.createVector(helper.getNumberOfSKUs() * helper.getNumberOfLocations());
       for (int skuIndex = 1; skuIndex <= helper.getNumberOfSKUs(); skuIndex++) {
-        vectorUpperLimit[helper.calculateIndex(skuIndex, locationIndex)] = 1.0;
+        vectorUpperLimit[helper.calculateIndexFromSkuLocation(skuIndex, locationIndex)] = 1.0;
       }
       constraints.add(new LinearConstraint(vectorUpperLimit, Relationship.EQ, 1));
     }
@@ -86,7 +86,7 @@ public class TrialSimplex {
     for (int skuIndex = 1; skuIndex <= helper.getNumberOfSKUs(); skuIndex++) {
       vectorUpperLimit = TrialSimplexUtil.createVector(helper.getNumberOfSKUs() * helper.getNumberOfLocations());
       for (int locationIndex = 1; locationIndex <= helper.getNumberOfLocations(); locationIndex++) {
-        vectorUpperLimit[helper.calculateIndex(skuIndex, locationIndex)] = 1.0;
+        vectorUpperLimit[helper.calculateIndexFromSkuLocation(skuIndex, locationIndex)] = 1.0;
       }
       constraints.add(new LinearConstraint(vectorUpperLimit, Relationship.EQ, 1));
     }
