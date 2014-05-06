@@ -45,7 +45,7 @@ public class TrialSimplexUtil {
   }
 
   public int calcPblLocationIndex(int PblLineIndex, int PblColumnIndex) {
-    return (PblLineIndex - 1) * getNumberOfPblLocationsPerLine() + PblColumnIndex - 1;
+    return (PblLineIndex - 1) * getNumberOfPblLocationsPerLine() + (PblColumnIndex - 1);
   }
 
   public int calcPblColumn(int locationIndex) {
@@ -57,11 +57,24 @@ public class TrialSimplexUtil {
   }
 
   public double calculatePickEffort(int locationIndex) {
+    //    double index = locationIndex;
+    //    double columns = getNumberOfPblLocationsPerLine();
+
     int pblLine = (locationIndex / getNumberOfPblLocationsPerLine()) + 1;
     int pblLocationInLine = (locationIndex % getNumberOfPblLocationsPerLine()) + 1;
 
-    int relLine = Math.abs(pblLine - ((getNumberOfPblLines() / 2) + 1));
-    int relLoc = Math.abs(pblLocationInLine - ((getNumberOfPblLocationsPerLine() / 2) + 1));
+    int relLine;
+    int relLoc;
+    if (getNumberOfPblLines() % 2 == 0) {
+      relLine = Math.abs(pblLine - ((getNumberOfPblLines() / 2)));
+    } else {
+      relLine = Math.abs(pblLine - ((getNumberOfPblLines() / 2)));
+    }
+    if (getNumberOfPblLocationsPerLine() % 2 == 0) {
+      relLoc = Math.abs(pblLocationInLine - ((getNumberOfPblLocationsPerLine() / 2)));
+    } else {
+      relLoc = Math.abs(pblLocationInLine - ((getNumberOfPblLocationsPerLine() / 2)));
+    }
 
     return relLine + relLoc;
   }
