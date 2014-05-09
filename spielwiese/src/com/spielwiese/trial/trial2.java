@@ -2,7 +2,6 @@
 package com.spielwiese.trial;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
@@ -11,8 +10,6 @@ import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
 import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.LinearObjectiveFunction;
 import org.apache.commons.math3.optim.linear.Relationship;
-import org.apache.commons.math3.optim.linear.SimplexSolver;
-import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.apache.log4j.Logger;
 
 public class trial2 {
@@ -53,22 +50,22 @@ public class trial2 {
       constraints.add(new LinearConstraint(new double[] {3, 2}, Relationship.LEQ, 12));
       constraints.add(new LinearConstraint(new double[] {0, 1}, Relationship.GEQ, 0));
 
-      // решаем
-      SimplexSolver ss = new SimplexSolver();
-      new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);
-
-      // получаем результат
-      double x = solution.getPoint()[0];
-      double y = solution.getPoint()[1];
-      double min = solution.getValue();
-      System.out.println(x + " " + y + " " + min);
+      //      // решаем
+      //      SimplexSolver ss = new SimplexSolver();
+      //      new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);
+      //
+      //      // получаем результат
+      //      double x = solution.getPoint()[0];
+      //      double y = solution.getPoint()[1];
+      //      double min = solution.getValue();
+      //      System.out.println(x + " " + y + " " + min);
     }
 
     FirstOrderIntegrator runge = new ClassicalRungeKuttaIntegrator(1.0e-1);
-    FirstOrderDifferentialEquations ode = new CircleODE(new double[] {1.0, 1.0}, 0.1);
-    double[] y = new double[] {0.0, 1.0}; // initial state
-    runge.integrate(ode, 0.0, y, 16.0, y); // now y contains final state at time t=16.0
-    System.out.println(Arrays.toString(y));
+    //    FirstOrderDifferentialEquations ode = new CircleODE(new double[] {1.0, 1.0}, 0.1);
+    //    double[] y = new double[] {0.0, 1.0}; // initial state
+    //    runge.integrate(ode, 0.0, y, 16.0, y); // now y contains final state at time t=16.0
+    //    System.out.println(Arrays.toString(y));
   }
 }
 
