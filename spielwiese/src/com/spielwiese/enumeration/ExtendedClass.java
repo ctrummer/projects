@@ -3,6 +3,6 @@
  */
 package com.spielwiese.enumeration;
 
-public class ExtendedClass extends BaseEnum {
+public class ExtendedClass {
 
 }
