@@ -1,0 +1,10 @@
+This demo project demonstrates the usage of Google Guice (pronounced as "Juice") framework and its
+dependency injection (DI) and aspect oriented programming (AOP) capabilities.
+
+Starting points for demo: Application.java in com.ssp.demo.guice.projects.customerOne, 
+customerTwo and customerThree packages.
+
+Customer One and Two are simply for demonstrating the DI, Customer Three for demonstrating
+the DI _and_ the AOP.
+
+Viktor Feurer

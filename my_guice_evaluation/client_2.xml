@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+
+	<orders>
+		<order>
+			<type>simple</type>
+			<id>1</id>
+			<desc>first</desc>
+			<details>111</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>2</id>
+			<desc>second</desc>
+			<details>222</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>3</id>
+			<desc>third</desc>
+			<details>333</details>
+		</order>
+		<order>
+			<type>simple</type>
+			<id>4</id>
+			<desc>fourth</desc>
+			<details>444</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>5</id>
+			<desc>fifth</desc>
+			<details>555</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>6</id>
+			<desc>sixth</desc>
+			<details>666</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>7</id>
+			<desc>seventh</desc>
+			<details>777</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>8</id>
+			<desc>eight</desc>
+			<details>888</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>1</id>
+			<desc>ninth</desc>
+			<details>999</details>
+		</order>
+		<order>
+			<type>complicated</type>
+			<id>10</id>
+			<desc>tenth</desc>
+			<details>AAA</details>
+		</order>
+	</orders>
+	
+	<engine>
+		<rejectId>3</rejectId>
+	</engine>
+	
+	<pool>
+		<initialSize>20</initialSize>
+	</pool>
+
+	<processor>
+		<limit>20</limit>
+	</processor>
+	
+</configuration>
