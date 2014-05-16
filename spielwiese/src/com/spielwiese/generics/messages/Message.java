@@ -1,19 +1,20 @@
+
 package com.spielwiese.generics.messages;
 
 import org.apache.log4j.Logger;
 
 public abstract class Message implements IMessage {
 
-    static Logger logger = Logger.getLogger(Message.class);
+  static Logger logger = Logger.getLogger(Message.class);
 
-    private String MessageString;
+  private String messageName;
 
-    public String getMessageString() {
-        return MessageString;
-    }
+  public String getMessageName() {
+    return messageName;
+  }
 
-    public void setMessageString(String messageString) {
-        MessageString = messageString;
-    }
+  public void setMessageName(String messageName) {
+    this.messageName = messageName;
+  }
 
 }
