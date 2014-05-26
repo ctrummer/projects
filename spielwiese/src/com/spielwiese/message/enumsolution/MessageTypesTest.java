@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import com.spielwiese.message.registry.MessageRegistry;
+
 /**
  * Copyright 2011 SSI Schaefer PEEM GmbH. All Rights reserved. <br />
  * <br />
@@ -37,7 +39,7 @@ public class MessageTypesTest extends TestCase {
 
   @Test
   public void testTypeIsUnique() throws Exception {
-    new BossMessageRegistry();
+    new MessageRegistry();
   }
 
   /**

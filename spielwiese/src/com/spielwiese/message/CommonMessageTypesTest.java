@@ -1,14 +1,12 @@
 
 package com.spielwiese.message;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
-
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
 
 public class CommonMessageTypesTest {
 
-  private static final ILogger LOG = LogHelper.getLogger();
+  static Logger LOG = Logger.getLogger(CommonMessageTypesTest.class);
 
   @Test
   public void test() throws Exception {

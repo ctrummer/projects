@@ -1,16 +1,14 @@
 
 package com.spielwiese.generics.handlers;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
+import org.apache.log4j.Logger;
 
+import com.spielwiese.generics.messages.MessageA;
 
-public class MessageCHandler extends MessageAHandler<T> {
+public class MessageCHandler<T extends MessageA> extends MessageAHandler<T> {
 
-  private static final ILogger LOG = LogHelper.getLogger();
-
+  static Logger logger = Logger.getLogger(MessageCHandler.class);
 }
-
 
 //---------------------------- Revision History ----------------------------
 //$Log$

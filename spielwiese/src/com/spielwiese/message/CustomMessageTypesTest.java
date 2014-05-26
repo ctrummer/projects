@@ -3,17 +3,15 @@ package com.spielwiese.message;
 
 import java.lang.reflect.Field;
 
-import org.jfree.util.Log;
+import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
-import com.ssp.common.messaging.boss.MessageTypes;
+import com.spielwiese.message.enumsolution.MessageTypes;
 
-public class CustomMessa {
+public class CustomMessageTypesTest {
 
-  private static final ILogger LOG = LogHelper.getLogger();
+  static Logger LOG = Logger.getLogger(CustomMessageTypesTest.class);
 
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
@@ -22,11 +20,11 @@ public class CustomMessa {
   @Test
   public void testName() throws Exception {
     MessageTypes tmp = MessageTypes.AklInsertDestination;
-    MessageTypes.values()
+    MessageTypes.values();
   }
 
   static {
-    checkMessageTypesConstraints();
+    //    checkMessageTypesConstraints();
   }
 
   protected static final void checkMessageTypesConstraints(Class MessageTypesClass) {
@@ -41,7 +39,7 @@ public class CustomMessa {
             addToLookUp(field.getName(), messageType);
           }
         } catch (IllegalAccessException e) {
-          Log.error("Static fields of MessagetType and its sub-types should be accessable - we have to handle the exception.");
+          LOG.error("Static fields of MessagetType and its sub-types should be accessable - we have to handle the exception.");
           throw new RuntimeException(e);
         }
       }
@@ -79,7 +77,7 @@ public class CustomMessa {
     } else {
       String errMess = "Field " + fieldName + " message type integer representation allready in use.";
       IllegalStateException exp = new IllegalStateException(errMess);
-      Log.error(errMess, exp);
+      LOG.error(errMess, exp);
       throw exp;
     }
 

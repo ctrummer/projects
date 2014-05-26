@@ -1,16 +1,13 @@
 
 package com.spielwiese.generics.messages;
 
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
-
+import org.apache.log4j.Logger;
 
 public class MessageC extends MessageA {
 
-  private static final ILogger LOG = LogHelper.getLogger();
+  static Logger logger = Logger.getLogger(MessageC.class);
 
 }
-
 
 //---------------------------- Revision History ----------------------------
 //$Log$

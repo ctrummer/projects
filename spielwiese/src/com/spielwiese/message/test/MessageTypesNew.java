@@ -5,15 +5,13 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jfree.util.Log;
-
-import com.ssp.common.logging.ILogger;
-import com.ssp.common.logging.LogHelper;
+import org.apache.log4j.Logger;
 
 public class MessageTypesNew {
 
   /** The Constant LOG. */
-  final static ILogger LOG = LogHelper.getLogger();
+  //  final static ILogger LOG = LogHelper.getLogger();
+  static Logger LOG = Logger.getLogger(MessageTypesNew.class);
 
   public static final IMessageType CustomMessageType = new MessageType(0x200001, "CustomMessageType");
   //public static final IMessageType MessageValueNull = new MessageType(null, "MessageValueNull");
@@ -40,7 +38,7 @@ public class MessageTypesNew {
             addToLookUp(field.getName(), messageType);
           }
         } catch (IllegalAccessException e) {
-          Log.error("Static fields of MessagetType and its sub-types should be accessable - we have to handle the exception.");
+          LOG.error("Static fields of MessagetType and its sub-types should be accessable - we have to handle the exception.");
           throw new RuntimeException(e);
         }
       }
@@ -78,7 +76,7 @@ public class MessageTypesNew {
     } else {
       String errMess = "Field " + fieldName + " message type integer representation allready in use.";
       IllegalStateException exp = new IllegalStateException(errMess);
-      Log.error(errMess, exp);
+      LOG.error(errMess, exp);
       throw exp;
     }
 

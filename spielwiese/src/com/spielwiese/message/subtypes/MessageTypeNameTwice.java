@@ -1,9 +1,9 @@
 
 package com.spielwiese.message.subtypes;
 
-import com.spp.custom.common.messaging.boss.IMessageType;
-import com.spp.custom.common.messaging.boss.MessageType;
-import com.spp.custom.common.messaging.boss.MessageTypesNew;
+import com.spielwiese.message.IMessageType;
+import com.spielwiese.message.MessageType;
+import com.spielwiese.message.MessageTypesNew;
 
 public class MessageTypeNameTwice extends MessageTypesNew {
 
