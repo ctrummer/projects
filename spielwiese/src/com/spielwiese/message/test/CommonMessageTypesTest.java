@@ -1,5 +1,5 @@
 
-package com.spielwiese.message;
+package com.spielwiese.message.test;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;

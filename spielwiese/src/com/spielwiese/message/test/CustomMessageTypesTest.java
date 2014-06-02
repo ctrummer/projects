@@ -1,5 +1,5 @@
 
-package com.spielwiese.message;
+package com.spielwiese.message.test;
 
 import java.lang.reflect.Field;
 
@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
 
+import com.spielwiese.message.IMessageType;
 import com.spielwiese.message.enumsolution.MessageTypes;
 
 public class CustomMessageTypesTest {

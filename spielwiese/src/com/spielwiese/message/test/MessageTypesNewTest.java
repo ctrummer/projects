@@ -1,9 +1,10 @@
 
-package com.spielwiese.message;
+package com.spielwiese.message.test;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import com.spielwiese.message.IMessageType;
 import com.spielwiese.message.subtypes.MessageTypeNameEmpty;
 import com.spielwiese.message.subtypes.MessageTypeNameNull;
 import com.spielwiese.message.subtypes.MessageTypeNameTwice;
