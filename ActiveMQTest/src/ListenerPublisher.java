@@ -94,8 +94,9 @@ class ListenerPublisher {
 
 		}
 		long stopSendingTime = System.currentTimeMillis();
-		System.out.println("Total time for creating and sending "
-				+ Configuration.numberOfTestMessages + " messages:"
+		System.out.println("Publisher: " + publisherID
+				+ " needed total time for creating and sending "
+				+ Configuration.numberOfTestMessages + " messages: "
 				+ (stopSendingTime - startSendingTime));
 
 	}

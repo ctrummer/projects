@@ -15,13 +15,19 @@ public class TestStarter {
 		OutputWriter out = new OutputWriter("./log/TestStarter.txt");
 		out.writeln("TestStarter started.");
 
-		// for (int listenerCounter = 1; listenerCounter <=
-		// Configuration.numberOfSubsribers; listenerCounter++) {
-		// createSubVm("java", "-cp", classpath, "Listener",
-		// Configuration.destination_listener, "Listener"
-		// + listenerCounter);
-		// out.writeln("Listener number " + listenerCounter + " started.");
-		// }
+		for (int listenerCounter = 1; listenerCounter <= Configuration.numberOfSubsribers; listenerCounter++) {
+			if (listenerCounter != Configuration.numberOfSubsribers) {
+				createSubVm("java", "-cp", classpath, "Listener",
+						Configuration.destination_listener, "Listener"
+								+ listenerCounter, "all");
+			} else {
+				createSubVm("java", "-cp", classpath, "Listener",
+						Configuration.destination_listener, "Listener"
+								+ listenerCounter, "1");
+			}
+
+			out.writeln("Listener number " + listenerCounter + " started.");
+		}
 
 		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
 			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
@@ -30,7 +36,7 @@ public class TestStarter {
 					+ " started.");
 		}
 
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 
 		createSubVm("java", "-cp", classpath, "PublishersStarter");
 

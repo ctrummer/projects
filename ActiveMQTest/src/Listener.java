@@ -22,7 +22,7 @@ class Listener {
 	public static void main(String[] args) throws JMSException, IOException {
 
 		Listener listener = new Listener(Configuration.destination_listener,
-				args[1]);
+				args[1], args[2]);
 		listener.readMessageBulk();
 	}
 
@@ -33,15 +33,18 @@ class Listener {
 	private MessageConsumer consumer;
 	private String listenerID;
 	private OutputWriter out;
+	private String filter;
 
 	public Listener(Destination source) throws JMSException {
 		dest = source;
+		filter = "all";
 		initListener();
 	}
 
-	public Listener(String source, String id) throws JMSException, IOException {
-		System.out.println("Source  == " + source);
-		System.out.println("id == " + id);
+	public Listener(String source, String id, String filter)
+			throws JMSException, IOException {
+		this.filter = filter;
+		System.out.println("Listener<" + id + "> Source  == " + source);
 		dest = Configuration.getDestination(source);
 		listenerID = id;
 		out = new OutputWriter("./log/" + listenerID + ".txt");
@@ -62,13 +65,17 @@ class Listener {
 
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-		consumer = session.createConsumer(dest);
-		// consumer =
-		// session.createConsumer(dest,"publisher = ’ListenerPublisher1’");
+		if (filter.equalsIgnoreCase("all")) {
+			consumer = session.createConsumer(dest);
+		} else {
+			consumer = session.createConsumer(dest, "publisher = '" + filter
+					+ "'");
+		}
 	}
 
 	public void readMessageBulk() throws JMSException {
-		System.out.println("Waiting for messages...");
+		System.out.println("Listener: " + listenerID
+				+ " is waiting for messages...");
 		int shutDownCounter = 0;
 		List<TimeMessage> messages = new ArrayList<TimeMessage>();
 		while (true) {
@@ -76,7 +83,8 @@ class Listener {
 			if (msg instanceof TextMessage) {
 				if (msg.getStringProperty("shutdown").equalsIgnoreCase("true")) {
 					shutDownCounter++;
-					if (shutDownCounter == Configuration.numberOfPublishers) {
+					if (shutDownCounter == Configuration.numberOfPublishers
+							|| !filter.equals("all")) {
 						connection.close();
 						calculateResults(messages);
 						System.exit(1);
@@ -110,7 +118,10 @@ class Listener {
 		}
 
 		for (int index = 0; index < Configuration.numberOfPublishers; index++) {
-			caluclateResultsPerPublisher(index, splittedLists[index]);
+			// may be empyt in case of filtering
+			if (!splittedLists[index].isEmpty()) {
+				caluclateResultsPerPublisher(index, splittedLists[index]);
+			}
 		}
 	}
 
@@ -121,11 +132,10 @@ class Listener {
 		TimeMessage firstMessage = messageList.get(0);
 		TimeMessage lastMessage = messageList.get(messageList.size() - 1);
 		long totalTime = lastMessage.time - firstMessage.time;
-		out.writeln("Total time to receive all messages from ListenerPubliser"
-				+ publisher + " == " + totalTime);
-		System.out
-				.println("Total time to receive all messages from ListenerPubliser"
-						+ publisher + " == " + totalTime);
+		out.writeln("Listener <" + listenerID + "> ListenerPublisher <"
+				+ publisher + "> Total time  == " + totalTime);
+		System.out.println("Listener <" + listenerID + "> ListenerPublisher <"
+				+ publisher + "> Total time  == " + totalTime);
 
 		int numberOfReceivedMessages = 0;
 		long totalRunTime = 0;
@@ -141,8 +151,10 @@ class Listener {
 				/ (numberOfReceivedMessages * 1.0);
 		out.writeln("Average time per message for ListenerPubliser" + publisher
 				+ " == " + averageRunTime);
-		System.out.println("Average time per message for ListenerPubliser"
-				+ publisher + " == " + averageRunTime);
+		System.out
+				.println("Listener <" + listenerID + "> ListenerPublisher <"
+						+ publisher + "> Average time per message == "
+						+ averageRunTime);
 
 	}
 
