@@ -22,8 +22,8 @@ public class TestStarter {
 		}
 
 		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
-			createSubVm("java", "-cp", classpath, "ListenerPublisher",
-					"ListenerPublisher" + publisherCounter);
+			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
+					+ publisherCounter);
 			out.writeln("Publisher number " + publisherCounter + " started.");
 		}
 

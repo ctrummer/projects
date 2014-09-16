@@ -74,8 +74,7 @@ class Listener {
 		while (true) {
 			Message msg = consumer.receive();
 			if (msg instanceof TextMessage) {
-				String body = ((TextMessage) msg).getText();
-				if ("SHUTDOWN".equals(body)) {
+				if (msg.getStringProperty("shutdown").equalsIgnoreCase("yes")) {
 					shutDownCounter++;
 					if (shutDownCounter == Configuration.numberOfPublishers) {
 						connection.close();
@@ -84,7 +83,7 @@ class Listener {
 					}
 				} else {
 					messages.add(new TimeMessage(System.currentTimeMillis(),
-							body));
+							(TextMessage) msg));
 				}
 			} else {
 				System.out
@@ -95,45 +94,56 @@ class Listener {
 
 	}
 
-	private void calculateResults(List<TimeMessage> allMessages) {
+	private void calculateResults(List<TimeMessage> allMessages)
+			throws NumberFormatException, JMSException {
 		List[] splittedLists = new ArrayList[Configuration.numberOfPublishers];
-		for (int index = 0; index <= Configuration.numberOfPublishers; index++) {
+		for (int index = 0; index < Configuration.numberOfPublishers; index++) {
 			splittedLists[index] = new ArrayList<TimeMessage>();
 		}
+
 		Iterator<TimeMessage> iterator = allMessages.iterator();
 		while (iterator.hasNext()) {
 			TimeMessage timeMessage = iterator.next();
-			int ListenerPublisherNumber = getListenerPublisherNumber(timeMessage.message);
+			int publisherNumber = Integer.valueOf(timeMessage.message
+					.getStringProperty("publisher"));
+			splittedLists[publisherNumber - 1].add(timeMessage);
 		}
 
-		out.writeln("Total time to receive all messages:" + (end - start));
-		System.out.println("Total time to receive all messages:"
-				+ (end - start));
-		int numberOfReceivedMessages = 0;
-		double totalTime = 0;
-		for (int i = 0; i < receivedBulkedMessages.length; i++) {
-			numberOfReceivedMessages++;
-			totalTime = +calculateTimeFromMessage(receivedBulkedMessages[i]);
+		for (int index = 0; index < Configuration.numberOfPublishers; index++) {
+			caluclateResultsPerPublisher(index, splittedLists[index]);
 		}
-		out.writeln("Average time per message:"
-				+ (totalTime / numberOfReceivedMessages));
-		System.out.println("Average time per message:"
-				+ (totalTime / numberOfReceivedMessages));
-
 	}
 
-	private long calculateTimeFromMessage(String message) {
-		System.out.println("message:" + message);
-		String endTime = message.substring(2, message.indexOf(" #:"));
-		// System.out.println("endTime:" + endTime);
-		String startTime = message.substring(message.indexOf(" t:") + 3,
-				message.indexOf(" s:"));
-		// System.out.println("startTime:" + startTime);
-		long end = Long.valueOf(endTime).longValue();
-		long start = Long.valueOf(startTime);
-		System.out.println("end:" + end + " start:" + start);
+	private void caluclateResultsPerPublisher(int publisher,
+			List<TimeMessage> messageList) throws NumberFormatException,
+			JMSException {
 
-		return (start - end);
+		TimeMessage firstMessage = messageList.get(0);
+		TimeMessage lastMessage = messageList.get(messageList.size());
+		long totalTime = lastMessage.time - firstMessage.time;
+		out.writeln("Total time to receive all messages from ListenerPubliser"
+				+ publisher + " == " + totalTime);
+		System.out
+				.println("Total time to receive all messages from ListenerPubliser"
+						+ publisher + " == " + totalTime);
+
+		int numberOfReceivedMessages = 0;
+		long totalRunTime = 0;
+		for (int index = 0; index < messageList.size(); index++) {
+			TimeMessage message = messageList.get(index);
+			long endTime = message.time;
+			long startTime = Long.valueOf(message.message
+					.getStringProperty("time"));
+			numberOfReceivedMessages++;
+			totalRunTime = totalRunTime + (endTime - startTime);
+		}
+		double averageRunTime = (totalRunTime * 1.0)
+				/ (numberOfReceivedMessages * 1.0);
+		out.writeln("Average time per message for ListenerPubliser" + publisher
+				+ " == " + averageRunTime);
+		System.out.println("Average time per message for ListenerPubliser"
+				+ publisher + " == " + averageRunTime);
+
 	}
 
 	public void waitUntilStartSignal(OutputWriter out) throws JMSException {
