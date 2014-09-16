@@ -10,22 +10,27 @@ public class TestStarter {
 			"./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
 			"./lib/qpid-amqp-1-0-common-0.26.jar;";
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		OutputWriter out = new OutputWriter("./log/TestStarter.txt");
 		out.writeln("TestStarter started.");
 
-		for (int listenerCounter = 1; listenerCounter <= Configuration.numberOfSubsribers; listenerCounter++) {
-			createSubVm("java", "-cp", classpath, "Listener",
-					Configuration.destination_listener, "Listener"
-							+ listenerCounter);
-			out.writeln("Listener number " + listenerCounter + " started.");
-		}
+		// for (int listenerCounter = 1; listenerCounter <=
+		// Configuration.numberOfSubsribers; listenerCounter++) {
+		// createSubVm("java", "-cp", classpath, "Listener",
+		// Configuration.destination_listener, "Listener"
+		// + listenerCounter);
+		// out.writeln("Listener number " + listenerCounter + " started.");
+		// }
 
 		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
 			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
 					+ publisherCounter);
-			out.writeln("Publisher number " + publisherCounter + " started.");
+			System.out.println("Publisher number " + publisherCounter
+					+ " started.");
 		}
+
+		Thread.sleep(5000);
 
 		createSubVm("java", "-cp", classpath, "PublishersStarter");
 

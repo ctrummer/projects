@@ -89,7 +89,7 @@ class ListenerPublisher {
 
 			msg.setStringProperty("publisher", publisherID);
 			msg.setStringProperty("time", Long.valueOf(currentTime).toString());
-			msg.setStringProperty("shutdown", "true");
+			msg.setStringProperty("shutdown", "false");
 			producer.send(msg);
 
 		}

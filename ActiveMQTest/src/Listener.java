@@ -74,7 +74,7 @@ class Listener {
 		while (true) {
 			Message msg = consumer.receive();
 			if (msg instanceof TextMessage) {
-				if (msg.getStringProperty("shutdown").equalsIgnoreCase("yes")) {
+				if (msg.getStringProperty("shutdown").equalsIgnoreCase("true")) {
 					shutDownCounter++;
 					if (shutDownCounter == Configuration.numberOfPublishers) {
 						connection.close();
@@ -119,7 +119,7 @@ class Listener {
 			JMSException {
 
 		TimeMessage firstMessage = messageList.get(0);
-		TimeMessage lastMessage = messageList.get(messageList.size());
+		TimeMessage lastMessage = messageList.get(messageList.size() - 1);
 		long totalTime = lastMessage.time - firstMessage.time;
 		out.writeln("Total time to receive all messages from ListenerPubliser"
 				+ publisher + " == " + totalTime);
