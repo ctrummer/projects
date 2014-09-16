@@ -1,0 +1,5 @@
+Mon Sep 15 21:07:28 CEST 2014 : TestStarter started.
+Mon Sep 15 21:07:28 CEST 2014 : Listener number 1 started.
+Mon Sep 15 21:07:28 CEST 2014 : Publisher number 1 started.
+Mon Sep 15 21:07:28 CEST 2014 : PublisherStarter started.
+Mon Sep 15 21:07:28 CEST 2014 : TestStarter finished.

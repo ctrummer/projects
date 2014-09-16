@@ -1,0 +1,3 @@
+Mon Sep 15 21:07:28 CEST 2014 : ListenerPublisher1 starts with the job.
+Mon Sep 15 21:07:28 CEST 2014 : Listener created
+Mon Sep 15 21:07:28 CEST 2014 : Startup message received ...

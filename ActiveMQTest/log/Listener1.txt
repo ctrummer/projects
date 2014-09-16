@@ -1,0 +1,5 @@
+Mon Sep 15 21:07:28 CEST 2014 : ListenerListener1 started
+Mon Sep 15 21:07:28 CEST 2014 : Initialization done ...
+Mon Sep 15 21:07:28 CEST 2014 : Waiting for a bulk of messages
+Mon Sep 15 21:07:29 CEST 2014 : Total time to receive all messages:530
+Mon Sep 15 21:07:29 CEST 2014 : Average time per message:-0.01
