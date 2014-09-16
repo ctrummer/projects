@@ -1,2 +1,0 @@
-Tue Sep 16 16:37:14 CEST 2014 : PublisherStarter starts with the job.
-Tue Sep 16 16:37:15 CEST 2014 : Broadcasted STARTUP-Message to topic for the publishers.
