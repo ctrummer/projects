@@ -58,11 +58,22 @@ class ListenerPublisher {
 		sendMessageBulk(session, producer);
 
 		// send a shutdown message
-		producer.send(session.createTextMessage("SHUTDOWN"));
+		sendMessageShutDown(session, producer);
 
 		Thread.sleep(1000 * 3);
 		connection.close();
 		System.exit(0);
+	}
+
+	private void sendMessageShutDown(Session session, MessageProducer producer)
+			throws JMSException {
+
+		TextMessage msg = session.createTextMessage("SHUTDOWN");
+		msg.setStringProperty("publisher", publisherID);
+		msg.setStringProperty("time", Long.valueOf(System.currentTimeMillis())
+				.toString());
+		msg.setStringProperty("shutdown", "true");
+		producer.send(msg);
 	}
 
 	private void sendMessageBulk(Session session, MessageProducer producer)
@@ -78,6 +89,7 @@ class ListenerPublisher {
 
 			msg.setStringProperty("publisher", publisherID);
 			msg.setStringProperty("time", Long.valueOf(currentTime).toString());
+			msg.setStringProperty("shutdown", "true");
 			producer.send(msg);
 
 		}

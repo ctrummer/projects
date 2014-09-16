@@ -1,11 +1,13 @@
+import javax.jms.TextMessage;
+
 public class TimeMessage {
 
 	public long time;
-	public String message;
+	public TextMessage message;
 
-	public TimeMessage(long currentTimeMillis, String messageBody) {
+	public TimeMessage(long currentTimeMillis, TextMessage message) {
 		time = currentTimeMillis;
-		message = messageBody;
+		this.message = message;
 	}
 
 }
