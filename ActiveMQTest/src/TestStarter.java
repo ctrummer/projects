@@ -29,16 +29,17 @@ public class TestStarter {
 			out.writeln("Listener number " + listenerCounter + " started.");
 		}
 
-		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
-			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
-					+ publisherCounter);
-			System.out.println("Publisher number " + publisherCounter
-					+ " started.");
-		}
-
-		Thread.sleep(10000);
-
-		createSubVm("java", "-cp", classpath, "PublishersStarter");
+		// for (int publisherCounter = 1; publisherCounter <=
+		// Configuration.numberOfPublishers; publisherCounter++) {
+		// createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
+		// + publisherCounter);
+		// System.out.println("Publisher number " + publisherCounter
+		// + " started.");
+		// }
+		//
+		// Thread.sleep(10000);
+		//
+		// createSubVm("java", "-cp", classpath, "PublishersStarter");
 
 		out.writeln("PublisherStarter started.");
 		out.writeln("TestStarter finished.");

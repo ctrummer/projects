@@ -34,6 +34,7 @@ class PublishersStarter {
 
 		Thread.sleep(1000 * 3);
 		connection.close();
+		System.out.println("PublisherStarter Exit!");
 		System.exit(0);
 	}
 

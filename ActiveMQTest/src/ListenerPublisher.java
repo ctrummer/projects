@@ -30,8 +30,8 @@ class ListenerPublisher {
 		out = new OutputWriter("./log/" + publisherID + ".txt");
 		out.writeln(publisherID + " starts with the job.");
 
-		Listener listener = new Listener(
-				Configuration.getDestination(Configuration.destination_starter));
+		Listener listener = new Listener(Configuration.destination_starter,
+				publisherID, "all");
 
 		out.writeln("Listener created");
 
@@ -62,6 +62,7 @@ class ListenerPublisher {
 
 		Thread.sleep(1000 * 3);
 		connection.close();
+		System.out.println("Publisher<" + publisherID + "> Exit!");
 		System.exit(0);
 	}
 

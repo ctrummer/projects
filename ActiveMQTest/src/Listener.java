@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jms.Connection;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
@@ -14,6 +13,7 @@ import javax.jms.TextMessage;
 import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
 // TODO think about this
 // session.createBrowser(queue) instead of session.createConsumer(dest);
+import org.apache.qpid.amqp_1_0.jms.impl.TopicImpl;
 
 // TODO receive processing acknowdlege
 // reciever vs. browser
@@ -26,7 +26,7 @@ class Listener {
 		listener.readMessageBulk();
 	}
 
-	private Destination dest;
+	private TopicImpl dest;
 	private ConnectionFactoryImpl factory;
 	private Connection connection;
 	private Session session;
@@ -35,17 +35,17 @@ class Listener {
 	private OutputWriter out;
 	private String filter;
 
-	public Listener(Destination source) throws JMSException {
-		dest = source;
-		filter = "all";
-		initListener();
-	}
+	// public Listener(TopicImpl source) throws JMSException {
+	// dest = source;
+	// filter = "all";
+	// initListener();
+	// }
 
 	public Listener(String source, String id, String filter)
 			throws JMSException, IOException {
 		this.filter = filter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
-		dest = Configuration.getDestination(source);
+		dest = new TopicImpl(source); // Configuration.getDestination(source);
 		listenerID = id;
 		out = new OutputWriter("./log/" + listenerID + ".txt");
 		out.writeln("Listener" + listenerID + " started");
@@ -61,15 +61,20 @@ class Listener {
 
 		connection = factory.createConnection(Configuration.user,
 				Configuration.password);
+		connection.setClientID(listenerID);
 		connection.start();
 
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 		if (filter.equalsIgnoreCase("all")) {
-			consumer = session.createConsumer(dest);
+			// consumer = session.createConsumer(dest);
+			consumer = session.createDurableSubscriber(dest, listenerID);
 		} else {
-			consumer = session.createConsumer(dest, "publisher = '" + filter
-					+ "'");
+			// consumer = session.createConsumer(dest, "publisher = '" + filter
+			// + "'");
+			consumer = session.createDurableSubscriber(dest, listenerID,
+					"publisher = '" + filter + "'", false);
+
 		}
 	}
 
@@ -87,6 +92,9 @@ class Listener {
 							|| !filter.equals("all")) {
 						connection.close();
 						calculateResults(messages);
+						System.out
+								.println("Listener<" + listenerID + "> Exit!");
+						;
 						System.exit(1);
 					}
 				} else {
