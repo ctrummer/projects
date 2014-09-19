@@ -1,11 +1,11 @@
 import javax.jms.Destination;
 
-import org.apache.qpid.amqp_1_0.jms.impl.QueueImpl;
-import org.apache.qpid.amqp_1_0.jms.impl.TopicImpl;
+import org.hornetq.jms.client.HornetQQueue;
+import org.hornetq.jms.client.HornetQTopic;
 
 public class Configuration {
-	public static final String user = "admin";
-	public static final String password = "password";
+	public static final String user = "guest";
+	public static final String password = "guest";
 	public static final String host = "localhost";
 	public static final int port = 5672;
 	public static final String destination_listener = "topic://event";
@@ -28,9 +28,9 @@ public class Configuration {
 	public static Destination getDestination(String destination) {
 		Destination dest = null;
 		if (destination.startsWith("topic://")) {
-			dest = new TopicImpl(destination);
+			dest = new HornetQTopic(destination);
 		} else {
-			dest = new QueueImpl(destination);
+			dest = new HornetQQueue(destination);
 		}
 		return dest;
 	}

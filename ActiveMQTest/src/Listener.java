@@ -2,19 +2,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
 // TODO think about this
 // session.createBrowser(queue) instead of session.createConsumer(dest);
-import org.apache.qpid.amqp_1_0.jms.impl.TopicImpl;
-
 // TODO receive processing acknowdlege
 // reciever vs. browser
 // wie verhalten sich topic bzw queues beim ack.
@@ -26,8 +28,8 @@ class Listener {
 		listener.readMessageBulk();
 	}
 
-	private TopicImpl dest;
-	private ConnectionFactoryImpl factory;
+	private Topic dest;
+	private ConnectionFactory factory;
 	private Connection connection;
 	private Session session;
 	private MessageConsumer consumer;
@@ -45,7 +47,9 @@ class Listener {
 			throws JMSException, IOException {
 		this.filter = filter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
-		dest = new TopicImpl(source); // Configuration.getDestination(source);
+
+		// dest = new HornetQTopic(source); //
+		// Configuration.getDestination(source);
 		listenerID = id;
 		out = new OutputWriter("./log/" + listenerID + ".txt");
 		out.writeln("Listener" + listenerID + " started");
@@ -55,26 +59,57 @@ class Listener {
 
 	}
 
-	private void initListener() throws JMSException {
-		factory = new ConnectionFactoryImpl(Configuration.host,
-				Configuration.port, Configuration.user, Configuration.password);
+	private void initListener() {
+		Connection connection = null;
+		InitialContext initialContext = null;
+		// getContext - start
+		Properties props = new Properties();
+		props.put("java.naming.factory.initial",
+				"org.jnp.interfaces.NamingContextFactory");
+		props.put("java.naming.provider.url", 0);
+		props.put("java.naming.factory.url.pkgs",
+				"org.jboss.naming:org.jnp.interfaces");
+		try {
+			initialContext = new InitialContext(props);
 
-		connection = factory.createConnection(Configuration.user,
-				Configuration.password);
-		connection.setClientID(listenerID);
-		connection.start();
+			// getContext - end
 
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			Topic topic = (Topic) initialContext.lookup("/topic/event");
+			ConnectionFactory cf = (ConnectionFactory) initialContext
+					.lookup("/ConnectionFactory");
+			connection = cf.createConnection();
+			connection.setClientID(listenerID);
+			connection.start();
 
-		if (filter.equalsIgnoreCase("all")) {
-			// consumer = session.createConsumer(dest);
-			consumer = session.createDurableSubscriber(dest, listenerID);
-		} else {
-			// consumer = session.createConsumer(dest, "publisher = '" + filter
-			// + "'");
-			consumer = session.createDurableSubscriber(dest, listenerID,
-					"publisher = '" + filter + "'", false);
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			dest = session.createTopic("topic://event");
+			if (filter.equalsIgnoreCase("all")) {
+				// consumer = session.createConsumer(dest);
+				consumer = session.createDurableSubscriber(dest, listenerID);
+			} else {
+				// consumer = session.createConsumer(dest, "publisher = '" +
+				// filter
+				// + "'");
+				consumer = session.createDurableSubscriber(dest, listenerID,
+						"publisher = '" + filter + "'", false);
 
+			}
+		} catch (NamingException e) {
+
+			e.printStackTrace();
+		} catch (JMSException e) {
+
+			e.printStackTrace();
+		} finally {
+			// Step 14. Be sure to close our JMS resources!
+			if (connection != null) {
+				// connection.close();
+			}
+
+			// Also the initialContext
+			if (initialContext != null) {
+				// initialContext.close();
+			}
 		}
 	}
 

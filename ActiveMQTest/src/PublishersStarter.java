@@ -1,12 +1,13 @@
 import java.io.IOException;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.DeliveryMode;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
+import org.hornetq.jms.client.HornetQTopicConnectionFactory;
 
 class PublishersStarter {
 
@@ -40,9 +41,10 @@ class PublishersStarter {
 
 	private Connection job() throws JMSException {
 		// Connection
-		ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
-				Configuration.host, Configuration.port, Configuration.user,
-				Configuration.password);
+		ConnectionFactory factory = new HornetQTopicConnectionFactory();
+		// ConnectionFactoryImpl(
+		// Configuration.host, Configuration.port, Configuration.user,
+		// Configuration.password);
 		Connection connection = factory.createConnection(Configuration.user,
 				Configuration.password);
 		connection.start();
