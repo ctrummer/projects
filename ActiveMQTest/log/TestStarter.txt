@@ -1,8 +1,0 @@
-Fri Sep 19 08:45:01 CEST 2014 : TestStarter started.
-Fri Sep 19 08:45:01 CEST 2014 : Listener number 1 started.
-Fri Sep 19 08:45:01 CEST 2014 : Listener number 2 started.
-Fri Sep 19 08:45:01 CEST 2014 : Listener number 3 started.
-Fri Sep 19 08:45:01 CEST 2014 : Listener number 4 started.
-Fri Sep 19 08:45:01 CEST 2014 : Listener number 5 started.
-Fri Sep 19 08:45:11 CEST 2014 : PublisherStarter started.
-Fri Sep 19 08:45:11 CEST 2014 : TestStarter finished.
