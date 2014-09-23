@@ -3,17 +3,14 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib_kafka/jopt-simple-3.2.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-javadoc.jar.asc"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-scaladoc.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-scaladoc.jar.asc"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1-sources.jar.asc"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1.jar.asc"/>
+	<classpathentry kind="lib" path="lib_kafka/kafka_2.8.0-0.8.1.1.jar" sourcepath="lib_kafka/src">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/ctr/git/projects/ActiveMQTest/lib_kafka/doc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib_kafka/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib_kafka/metrics-core-2.2.0.jar"/>
-	<classpathentry kind="lib" path="lib_kafka/scala-library-2.8.0.jar"/>
+	<classpathentry kind="lib" path="lib_kafka/scala-library-2.8.0.jar" sourcepath="C:/Users/ctr/.m2/repository/org/scala-lang/scala-library/2.8.0/scala-library-2.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib_kafka/slf4j-api-1.7.2.jar"/>
 	<classpathentry kind="lib" path="lib_kafka/snappy-java-1.0.5.jar"/>
 	<classpathentry kind="lib" path="lib_kafka/zkclient-0.3.jar"/>
