@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.server</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>server</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">server</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.server.AbstractFetcherManager">
+      <h4 class="signature"><a href="AbstractFetcherManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">AbstractFetcherManager</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: abstract 
+        </div></div>
+          
+    </li><li visbl="pub" name="kafka.server.AbstractFetcherThread">
+      <h4 class="signature"><a href="AbstractFetcherThread.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">AbstractFetcherThread</span><span class="result"> extends ShutdownableThread</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt"> Abstract class for fetching data from multiple partitions from the same broker.</p>
+    </li><li visbl="pub" name="kafka.server.BrokerAndFetcherId">
+      <h4 class="signature"><a href="BrokerAndFetcherId.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">BrokerAndFetcherId</span><span class="params">(<span name="broker">broker: Broker</span>, <span name="fetcherId">fetcherId: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.BrokerAndInitialOffset">
+      <h4 class="signature"><a href="BrokerAndInitialOffset.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">BrokerAndInitialOffset</span><span class="params">(<span name="broker">broker: Broker</span>, <span name="initOffset">initOffset: Long</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.BrokerTopicMetrics">
+      <h4 class="signature"><a href="BrokerTopicMetrics.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">BrokerTopicMetrics</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.ClientIdBrokerTopicPartition">
+      <h4 class="signature"><a href="ClientIdBrokerTopicPartition.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ClientIdBrokerTopicPartition</span><span class="params">(<span name="clientId">clientId: String</span>, <span name="brokerInfo">brokerInfo: String</span>, <span name="topic">topic: String</span>, <span name="partitionId">partitionId: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.DelayedRequest">
+      <h4 class="signature"><a href="DelayedRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">DelayedRequest</span><span class="result"> extends DelayedItem[Request]</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A request whose processing needs to be delayed for at most the given delayMs
+The associated keys are used for bookeeping, and represent the &quot;trigger&quot; that causes this request to check if it is satisfied,
+for example a key could be a (topic, partition) pair.</p>
+    </li><li visbl="pub" name="kafka.server.FetcherLagMetrics">
+      <h4 class="signature"><a href="FetcherLagMetrics.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetcherLagMetrics</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.FetcherLagStats">
+      <h4 class="signature"><a href="FetcherLagStats.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetcherLagStats</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.FetcherStats">
+      <h4 class="signature"><a href="FetcherStats.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetcherStats</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.KafkaApis">
+      <h4 class="signature"><a href="KafkaApis.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaApis</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Logic to handle the various Kafka requests
+</p>
+    </li><li visbl="pub" name="kafka.server.KafkaConfig">
+      <h4 class="signature"><a href="KafkaConfig.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaConfig</span><span class="result"> extends ZKConfig</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Configuration settings for the kafka server
+</p>
+    </li><li visbl="pub" name="kafka.server.KafkaHealthcheck">
+      <h4 class="signature"><a href="KafkaHealthcheck.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaHealthcheck</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This class registers the broker in zookeeper to allow
+other brokers and consumers to detect failures.</p>
+    </li><li visbl="pub" name="kafka.server.KafkaRequestHandler">
+      <h4 class="signature"><a href="KafkaRequestHandler.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaRequestHandler</span><span class="result"> extends Runnable with Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A thread that answers kafka requests.</p>
+    </li><li visbl="pub" name="kafka.server.KafkaRequestHandlerPool">
+      <h4 class="signature"><a href="KafkaRequestHandlerPool.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaRequestHandlerPool</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.KafkaServer">
+      <h4 class="signature"><a href="KafkaServer.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaServer</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Represents the lifecycle of a single Kafka broker.</p>
+    </li><li visbl="pub" name="kafka.server.KafkaServerStartable">
+      <h4 class="signature"><a href="KafkaServerStartable.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaServerStartable</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.LeaderElector">
+      <h4 class="signature"><a href="LeaderElector.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">LeaderElector</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This trait defines a leader elector If the existing leader is dead, this class will handle automatic
+re-election and if it succeeds, it invokes the leader state change callback
+</p>
+    </li><li visbl="pub" name="kafka.server.OffsetCheckpoint">
+      <h4 class="signature"><a href="OffsetCheckpoint.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetCheckpoint</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This class saves out a map of topic/partition=&gt;offsets to a file
+</p>
+    </li><li visbl="pub" name="kafka.server.ReplicaFetcherManager">
+      <h4 class="signature"><a href="ReplicaFetcherManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ReplicaFetcherManager</span><span class="result"> extends AbstractFetcherManager</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.ReplicaFetcherThread">
+      <h4 class="signature"><a href="ReplicaFetcherThread.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ReplicaFetcherThread</span><span class="result"> extends AbstractFetcherThread</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.ReplicaManager">
+      <h4 class="signature"><a href="ReplicaManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ReplicaManager</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.RequestPurgatory">
+      <h4 class="signature"><a href="RequestPurgatory.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">RequestPurgatory</span><span class="tparams">[<span name="T">T &lt;: DelayedRequest</span>, <span name="R">R</span>]</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A helper class for dealing with asynchronous requests with a timeout.</p>
+    </li><li visbl="pub" name="kafka.server.TopicConfigManager">
+      <h4 class="signature"><a href="TopicConfigManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicConfigManager</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This class initiates and carries out topic config changes.</p>
+    </li><li visbl="pub" name="kafka.server.ZookeeperLeaderElector">
+      <h4 class="signature"><a href="ZookeeperLeaderElector.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ZookeeperLeaderElector</span><span class="result"> extends LeaderElector with Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This class handles zookeeper based leader election based on an ephemeral path.</p>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.server.BrokerTopicStats">
+      <h4 class="signature"><a href="BrokerTopicStats$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">BrokerTopicStats</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.server.ReplicaManager">
+      <h4 class="signature"><a href="ReplicaManager$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ReplicaManager</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>

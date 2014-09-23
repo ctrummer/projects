@@ -1,0 +1,563 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.api</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>api</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">api</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.api.ControlledShutdownRequest">
+      <h4 class="signature"><a href="ControlledShutdownRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ControlledShutdownRequest</span><span class="params">(<span name="versionId">versionId: Short</span>, <span name="correlationId">correlationId: Int</span>, <span name="brokerId">brokerId: Int</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ControlledShutdownResponse">
+      <h4 class="signature"><a href="ControlledShutdownResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ControlledShutdownResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>, <span name="partitionsRemaining">partitionsRemaining: Set[TopicAndPartition]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchRequest">
+      <h4 class="signature"><a href="FetchRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchRequest</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchRequestBuilder">
+      <h4 class="signature"><a href="FetchRequestBuilder.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchRequestBuilder</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchResponse">
+      <h4 class="signature"><a href="FetchResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="data">data: Map[TopicAndPartition, FetchResponsePartitionData]</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchResponsePartitionData">
+      <h4 class="signature"><a href="FetchResponsePartitionData.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchResponsePartitionData</span><span class="params">(<span name="error">error: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>, <span name="hw">hw: Long = <span class="default">-1L</span></span>, <span name="messages">messages: MessageSet</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchResponseSend">
+      <h4 class="signature"><a href="FetchResponseSend.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchResponseSend</span><span class="result"> extends Send</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsr">
+      <h4 class="signature"><a href="LeaderAndIsr.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsr</span><span class="params">(<span name="leader">leader: Int</span>, <span name="leaderEpoch">leaderEpoch: Int</span>, <span name="isr">isr: List[Int]</span>, <span name="zkVersion">zkVersion: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsrRequest">
+      <h4 class="signature"><a href="LeaderAndIsrRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsrRequest</span><span class="params">(<span name="versionId">versionId: Short</span>, <span name="correlationId">correlationId: Int</span>, <span name="clientId">clientId: String</span>, <span name="controllerId">controllerId: Int</span>, <span name="controllerEpoch">controllerEpoch: Int</span>, <span name="partitionStateInfos">partitionStateInfos: Map[(String, Int), PartitionStateInfo]</span>, <span name="leaders">leaders: Set[Broker]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsrResponse">
+      <h4 class="signature"><a href="LeaderAndIsrResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsrResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="responseMap">responseMap: Map[(String, Int), Short]</span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetCommitRequest">
+      <h4 class="signature"><a href="OffsetCommitRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetCommitRequest</span><span class="params">(<span name="groupId">groupId: String</span>, <span name="requestInfo">requestInfo: Map[TopicAndPartition, OffsetMetadataAndError]</span>, <span name="versionId">versionId: Short = <span class="default">OffsetCommitRequest.CurrentVersion</span></span>, <span name="correlationId">correlationId: Int = <span class="default">0</span></span>, <span name="clientId">clientId: String = <span class="default">OffsetCommitRequest.DefaultClientId</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetCommitResponse">
+      <h4 class="signature"><a href="OffsetCommitResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetCommitResponse</span><span class="params">(<span name="requestInfo">requestInfo: Map[TopicAndPartition, Short]</span>, <span name="correlationId">correlationId: Int = <span class="default">0</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetFetchRequest">
+      <h4 class="signature"><a href="OffsetFetchRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetFetchRequest</span><span class="params">(<span name="groupId">groupId: String</span>, <span name="requestInfo">requestInfo: Seq[TopicAndPartition]</span>, <span name="versionId">versionId: Short = <span class="default">OffsetFetchRequest.CurrentVersion</span></span>, <span name="correlationId">correlationId: Int = <span class="default">0</span></span>, <span name="clientId">clientId: String = <span class="default">OffsetFetchRequest.DefaultClientId</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetFetchResponse">
+      <h4 class="signature"><a href="OffsetFetchResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetFetchResponse</span><span class="params">(<span name="requestInfo">requestInfo: Map[TopicAndPartition, OffsetMetadataAndError]</span>, <span name="correlationId">correlationId: Int = <span class="default">0</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetRequest">
+      <h4 class="signature"><a href="OffsetRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetRequest</span><span class="params">(<span name="requestInfo">requestInfo: Map[TopicAndPartition, PartitionOffsetRequestInfo]</span>, <span name="versionId">versionId: Short = <span class="default">OffsetRequest.CurrentVersion</span></span>, <span name="correlationId">correlationId: Int = <span class="default">0</span></span>, <span name="clientId">clientId: String = <span class="default">OffsetRequest.DefaultClientId</span></span>, <span name="replicaId">replicaId: Int = <span class="default">Request.OrdinaryConsumerId</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetResponse">
+      <h4 class="signature"><a href="OffsetResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="partitionErrorAndOffsets">partitionErrorAndOffsets: Map[TopicAndPartition, PartitionOffsetsResponse]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionDataSend">
+      <h4 class="signature"><a href="PartitionDataSend.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionDataSend</span><span class="result"> extends Send</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionFetchInfo">
+      <h4 class="signature"><a href="PartitionFetchInfo.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionFetchInfo</span><span class="params">(<span name="offset">offset: Long</span>, <span name="fetchSize">fetchSize: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionMetadata">
+      <h4 class="signature"><a href="PartitionMetadata.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionMetadata</span><span class="params">(<span name="partitionId">partitionId: Int</span>, <span name="leader">leader: Option[Broker]</span>, <span name="replicas">replicas: Seq[Broker]</span>, <span name="isr">isr: Seq[Broker] = <span class="default">collection.this.Seq.empty[Nothing]</span></span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>)</span><span class="result"> extends Logging with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionOffsetRequestInfo">
+      <h4 class="signature"><a href="PartitionOffsetRequestInfo.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionOffsetRequestInfo</span><span class="params">(<span name="time">time: Long</span>, <span name="maxNumOffsets">maxNumOffsets: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionOffsetsResponse">
+      <h4 class="signature"><a href="PartitionOffsetsResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionOffsetsResponse</span><span class="params">(<span name="error">error: Short</span>, <span name="offsets">offsets: Seq[Long]</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionStateInfo">
+      <h4 class="signature"><a href="PartitionStateInfo.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionStateInfo</span><span class="params">(<span name="leaderIsrAndControllerEpoch">leaderIsrAndControllerEpoch: LeaderIsrAndControllerEpoch</span>, <span name="allReplicas">allReplicas: Set[Int]</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ProducerRequest">
+      <h4 class="signature"><a href="ProducerRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ProducerRequest</span><span class="params">(<span name="versionId">versionId: Short = <span class="default">ProducerRequest.CurrentVersion</span></span>, <span name="correlationId">correlationId: Int</span>, <span name="clientId">clientId: String</span>, <span name="requiredAcks">requiredAcks: Short</span>, <span name="ackTimeoutMs">ackTimeoutMs: Int</span>, <span name="data">data: Map[TopicAndPartition, ByteBufferMessageSet]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ProducerResponse">
+      <h4 class="signature"><a href="ProducerResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ProducerResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="status">status: Map[TopicAndPartition, ProducerResponseStatus]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ProducerResponseStatus">
+      <h4 class="signature"><a href="ProducerResponseStatus.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ProducerResponseStatus</span><span class="params">(<span name="error">error: Short</span>, <span name="offset">offset: Long</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.StopReplicaRequest">
+      <h4 class="signature"><a href="StopReplicaRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">StopReplicaRequest</span><span class="params">(<span name="versionId">versionId: Short</span>, <span name="correlationId">correlationId: Int</span>, <span name="clientId">clientId: String</span>, <span name="controllerId">controllerId: Int</span>, <span name="controllerEpoch">controllerEpoch: Int</span>, <span name="deletePartitions">deletePartitions: Boolean</span>, <span name="partitions">partitions: Set[TopicAndPartition]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.StopReplicaResponse">
+      <h4 class="signature"><a href="StopReplicaResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">StopReplicaResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="responseMap">responseMap: Map[TopicAndPartition, Short]</span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicData">
+      <h4 class="signature"><a href="TopicData.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicData</span><span class="params">(<span name="topic">topic: String</span>, <span name="partitionData">partitionData: Map[Int, FetchResponsePartitionData]</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicDataSend">
+      <h4 class="signature"><a href="TopicDataSend.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicDataSend</span><span class="result"> extends Send</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadata">
+      <h4 class="signature"><a href="TopicMetadata.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicMetadata</span><span class="params">(<span name="topic">topic: String</span>, <span name="partitionsMetadata">partitionsMetadata: Seq[PartitionMetadata]</span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>)</span><span class="result"> extends Logging with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadataRequest">
+      <h4 class="signature"><a href="TopicMetadataRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicMetadataRequest</span><span class="params">(<span name="versionId">versionId: Short</span>, <span name="correlationId">correlationId: Int</span>, <span name="clientId">clientId: String</span>, <span name="topics">topics: Seq[String]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadataResponse">
+      <h4 class="signature"><a href="TopicMetadataResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicMetadataResponse</span><span class="params">(<span name="topicsMetadata">topicsMetadata: Seq[TopicMetadata]</span>, <span name="correlationId">correlationId: Int</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.UpdateMetadataRequest">
+      <h4 class="signature"><a href="UpdateMetadataRequest.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UpdateMetadataRequest</span><span class="params">(<span name="versionId">versionId: Short</span>, <span name="correlationId">correlationId: Int</span>, <span name="clientId">clientId: String</span>, <span name="controllerId">controllerId: Int</span>, <span name="controllerEpoch">controllerEpoch: Int</span>, <span name="partitionStateInfos">partitionStateInfos: Map[TopicAndPartition, PartitionStateInfo]</span>, <span name="aliveBrokers">aliveBrokers: Set[Broker]</span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.UpdateMetadataResponse">
+      <h4 class="signature"><a href="UpdateMetadataResponse.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UpdateMetadataResponse</span><span class="params">(<span name="correlationId">correlationId: Int</span>, <span name="errorCode">errorCode: Short = <span class="default">kafka.common.ErrorMapping.NoError</span></span>)</span><span class="result"> extends RequestOrResponse with Product</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.api.ApiUtils">
+      <h4 class="signature"><a href="ApiUtils$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ApiUtils</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Helper functions specific to parsing or serializing requests and responses
+</p>
+    </li><li visbl="pub" name="kafka.api.ControlledShutdownRequest">
+      <h4 class="signature"><a href="ControlledShutdownRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ControlledShutdownRequest</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ControlledShutdownResponse">
+      <h4 class="signature"><a href="ControlledShutdownResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ControlledShutdownResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchRequest">
+      <h4 class="signature"><a href="FetchRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">FetchRequest</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchResponse">
+      <h4 class="signature"><a href="FetchResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">FetchResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.FetchResponsePartitionData">
+      <h4 class="signature"><a href="FetchResponsePartitionData$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">FetchResponsePartitionData</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsr">
+      <h4 class="signature"><a href="LeaderAndIsr$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsr</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsrRequest">
+      <h4 class="signature"><a href="LeaderAndIsrRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsrRequest</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.LeaderAndIsrResponse">
+      <h4 class="signature"><a href="LeaderAndIsrResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">LeaderAndIsrResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetCommitRequest">
+      <h4 class="signature"><a href="OffsetCommitRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetCommitRequest</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetCommitResponse">
+      <h4 class="signature"><a href="OffsetCommitResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetCommitResponse</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetFetchRequest">
+      <h4 class="signature"><a href="OffsetFetchRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetFetchRequest</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetFetchResponse">
+      <h4 class="signature"><a href="OffsetFetchResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetFetchResponse</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetRequest">
+      <h4 class="signature"><a href="OffsetRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetRequest</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.OffsetResponse">
+      <h4 class="signature"><a href="OffsetResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionMetadata">
+      <h4 class="signature"><a href="PartitionMetadata$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">PartitionMetadata</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.PartitionStateInfo">
+      <h4 class="signature"><a href="PartitionStateInfo$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">PartitionStateInfo</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ProducerRequest">
+      <h4 class="signature"><a href="ProducerRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ProducerRequest</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.ProducerResponse">
+      <h4 class="signature"><a href="ProducerResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ProducerResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.Request">
+      <h4 class="signature"><a href="Request$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Request</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.RequestKeys">
+      <h4 class="signature"><a href="RequestKeys$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">RequestKeys</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.StopReplicaRequest">
+      <h4 class="signature"><a href="StopReplicaRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">StopReplicaRequest</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.StopReplicaResponse">
+      <h4 class="signature"><a href="StopReplicaResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">StopReplicaResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicData">
+      <h4 class="signature"><a href="TopicData$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">TopicData</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadata">
+      <h4 class="signature"><a href="TopicMetadata$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">TopicMetadata</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadataRequest">
+      <h4 class="signature"><a href="TopicMetadataRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">TopicMetadataRequest</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.TopicMetadataResponse">
+      <h4 class="signature"><a href="TopicMetadataResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">TopicMetadataResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.UpdateMetadataRequest">
+      <h4 class="signature"><a href="UpdateMetadataRequest$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">UpdateMetadataRequest</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.api.UpdateMetadataResponse">
+      <h4 class="signature"><a href="UpdateMetadataResponse$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">UpdateMetadataResponse</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>

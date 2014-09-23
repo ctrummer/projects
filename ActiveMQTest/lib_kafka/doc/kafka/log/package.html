@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.log</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>log</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">log</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.log.CleanerConfig">
+      <h4 class="signature"><a href="CleanerConfig.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">CleanerConfig</span><span class="params">(<span name="numThreads">numThreads: Int = <span class="default">1</span></span>, <span name="dedupeBufferSize">dedupeBufferSize: Long = <span class="default">4.*(1024).*(1024L)</span></span>, <span name="dedupeBufferLoadFactor">dedupeBufferLoadFactor: Double = <span class="default">0.9</span></span>, <span name="ioBufferSize">ioBufferSize: Int = <span class="default">1024.*(1024)</span></span>, <span name="maxMessageSize">maxMessageSize: Int = <span class="default">32.*(1024).*(1024)</span></span>, <span name="maxIoBytesPerSecond">maxIoBytesPerSecond: Double = <span class="default">scala.Double.MaxValue</span></span>, <span name="backOffMs">backOffMs: Long = <span class="default">15.*(1000)</span></span>, <span name="enableCleaner">enableCleaner: Boolean = <span class="default">true</span></span>, <span name="hashAlgorithm">hashAlgorithm: String = <span class="default">&quot;MD5&quot;</span></span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Configuration parameters for the log cleaner
+</p>
+    </li><li visbl="pub" name="kafka.log.FileMessageSet">
+      <h4 class="signature"><a href="FileMessageSet.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FileMessageSet</span><span class="result"> extends MessageSet with Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An on-disk message set.</p>
+    </li><li visbl="pub" name="kafka.log.Log">
+      <h4 class="signature"><a href="Log.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Log</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An append-only log for storing messages.</p>
+    </li><li visbl="pub" name="kafka.log.LogCleaner">
+      <h4 class="signature"><a href="LogCleaner.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LogCleaner</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">The cleaner is responsible for removing obsolete records from logs which have the dedupe retention strategy.</p>
+    </li><li visbl="pub" name="kafka.log.LogConfig">
+      <h4 class="signature"><a href="LogConfig.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LogConfig</span><span class="params">(<span name="segmentSize">segmentSize: Int = <span class="default">1024.*(1024)</span></span>, <span name="segmentMs">segmentMs: Long = <span class="default">scala.Long.MaxValue</span></span>, <span name="flushInterval">flushInterval: Long = <span class="default">scala.Long.MaxValue</span></span>, <span name="flushMs">flushMs: Long = <span class="default">scala.Long.MaxValue</span></span>, <span name="retentionSize">retentionSize: Long = <span class="default">scala.Long.MaxValue</span></span>, <span name="retentionMs">retentionMs: Long = <span class="default">scala.Long.MaxValue</span></span>, <span name="maxMessageSize">maxMessageSize: Int = <span class="default">scala.Int.MaxValue</span></span>, <span name="maxIndexSize">maxIndexSize: Int = <span class="default">1024.*(1024)</span></span>, <span name="indexInterval">indexInterval: Int = <span class="default">4096</span></span>, <span name="fileDeleteDelayMs">fileDeleteDelayMs: Long = <span class="default">60.*(1000)</span></span>, <span name="deleteRetentionMs">deleteRetentionMs: Long = <span class="default">24.*(60).*(60).*(1000L)</span></span>, <span name="minCleanableRatio">minCleanableRatio: Double = <span class="default">0.5</span></span>, <span name="compact">compact: Boolean = <span class="default">false</span></span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Configuration settings for a log</p>
+    </li><li visbl="pub" name="kafka.log.LogManager">
+      <h4 class="signature"><a href="LogManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LogManager</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">The entry point to the kafka log management subsystem.</p>
+    </li><li visbl="pub" name="kafka.log.LogSegment">
+      <h4 class="signature"><a href="LogSegment.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LogSegment</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A segment of the log.</p>
+    </li><li visbl="pub" name="kafka.log.OffsetIndex">
+      <h4 class="signature"><a href="OffsetIndex.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetIndex</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An index that maps offsets to physical file locations for a particular log segment.</p>
+    </li><li visbl="pub" name="kafka.log.OffsetMap">
+      <h4 class="signature"><a href="OffsetMap.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">OffsetMap</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.log.OffsetPosition">
+      <h4 class="signature"><a href="OffsetPosition.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetPosition</span><span class="params">(<span name="offset">offset: Long</span>, <span name="position">position: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">The mapping between a logical log offset and the physical position
+in some log file of the beginning of the message set entry with the
+given offset.</p>
+    </li><li visbl="pub" name="kafka.log.SkimpyOffsetMap">
+      <h4 class="signature"><a href="SkimpyOffsetMap.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">SkimpyOffsetMap</span><span class="result"> extends OffsetMap</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An hash table used for deduplicating the log.</p>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.log.Log">
+      <h4 class="signature"><a href="Log$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Log</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Helper functions for logs
+</p>
+    </li><li visbl="pub" name="kafka.log.LogConfig">
+      <h4 class="signature"><a href="LogConfig$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">LogConfig</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.log.LogFlushStats">
+      <h4 class="signature"><a href="LogFlushStats$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">LogFlushStats</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>

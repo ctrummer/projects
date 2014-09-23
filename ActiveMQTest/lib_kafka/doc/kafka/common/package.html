@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.common</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>common</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">common</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.common.AdminCommandFailedException">
+      <h4 class="signature"><a href="AdminCommandFailedException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">AdminCommandFailedException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.BrokerNotAvailableException">
+      <h4 class="signature"><a href="BrokerNotAvailableException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">BrokerNotAvailableException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.ClientIdAndBroker">
+      <h4 class="signature"><a href="ClientIdAndBroker.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ClientIdAndBroker</span><span class="params">(<span name="clientId">clientId: String</span>, <span name="brokerInfo">brokerInfo: String</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Convenience case class since (clientId, brokerInfo) pairs are used to create
+SyncProducer Request Stats and SimpleConsumer Request and Response Stats.</p>
+    </li><li visbl="pub" name="kafka.common.ClientIdAndTopic">
+      <h4 class="signature"><a href="ClientIdAndTopic.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ClientIdAndTopic</span><span class="params">(<span name="clientId">clientId: String</span>, <span name="topic">topic: String</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Convenience case class since (clientId, topic) pairs are used in the creation
+of many Stats objects.</p>
+    </li><li visbl="pub" name="kafka.common.Config">
+      <h4 class="signature"><a href="Config.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Config</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.ConsumerRebalanceFailedException">
+      <h4 class="signature"><a href="ConsumerRebalanceFailedException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerRebalanceFailedException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a request is made for broker but no brokers with that topic
+exist.</p>
+    </li><li visbl="pub" name="kafka.common.ControllerMovedException">
+      <h4 class="signature"><a href="ControllerMovedException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ControllerMovedException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.FailedToSendMessageException">
+      <h4 class="signature"><a href="FailedToSendMessageException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FailedToSendMessageException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates a producer pool initialization problem</p>
+    </li><li visbl="pub" name="kafka.common.InvalidConfigException">
+      <h4 class="signature"><a href="InvalidConfigException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">InvalidConfigException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates that the given config parameter has invalid value
+</p>
+    </li><li visbl="pub" name="kafka.common.InvalidMessageSizeException">
+      <h4 class="signature"><a href="InvalidMessageSizeException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">InvalidMessageSizeException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates the client has requested a range no longer available on the server
+</p>
+    </li><li visbl="pub" name="kafka.common.InvalidOffsetException">
+      <h4 class="signature"><a href="InvalidOffsetException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">InvalidOffsetException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.InvalidTopicException">
+      <h4 class="signature"><a href="InvalidTopicException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">InvalidTopicException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.KafkaException">
+      <h4 class="signature"><a href="KafkaException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Generic Kafka exception</p>
+    </li><li visbl="pub" name="kafka.common.KafkaStorageException">
+      <h4 class="signature"><a href="KafkaStorageException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaStorageException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Kafka exception caused by real IOs.</p>
+    </li><li visbl="pub" name="kafka.common.LeaderElectionNotNeededException">
+      <h4 class="signature"><a href="LeaderElectionNotNeededException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderElectionNotNeededException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This exception is thrown when new leader election is not necessary.</p>
+    </li><li visbl="pub" name="kafka.common.LeaderNotAvailableException">
+      <h4 class="signature"><a href="LeaderNotAvailableException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderNotAvailableException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a request is made for partition, but no leader exists for that partition
+</p>
+    </li><li visbl="pub" name="kafka.common.LogCleaningAbortedException">
+      <h4 class="signature"><a href="LogCleaningAbortedException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LogCleaningAbortedException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a log cleaning task is requested to be aborted.</p>
+    </li><li visbl="pub" name="kafka.common.MessageSizeTooLargeException">
+      <h4 class="signature"><a href="MessageSizeTooLargeException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">MessageSizeTooLargeException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.NoBrokersForPartitionException">
+      <h4 class="signature"><a href="NoBrokersForPartitionException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NoBrokersForPartitionException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a request is made for broker but no brokers with that topic
+exist.</p>
+    </li><li visbl="pub" name="kafka.common.NoEpochForPartitionException">
+      <h4 class="signature"><a href="NoEpochForPartitionException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NoEpochForPartitionException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a get epoch request is made for partition, but no epoch exists for that partition
+</p>
+    </li><li visbl="pub" name="kafka.common.NoReplicaOnlineException">
+      <h4 class="signature"><a href="NoReplicaOnlineException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NoReplicaOnlineException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">This exception is thrown by the leader elector in the controller when leader election fails for a partition since
+all the replicas for a partition are offline
+</p>
+    </li><li visbl="pub" name="kafka.common.NotAssignedReplicaException">
+      <h4 class="signature"><a href="NotAssignedReplicaException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NotAssignedReplicaException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.NotLeaderForPartitionException">
+      <h4 class="signature"><a href="NotLeaderForPartitionException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NotLeaderForPartitionException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a request is made for partition on a broker that is NOT a leader for that partition
+</p>
+    </li><li visbl="pub" name="kafka.common.OffsetMetadataAndError">
+      <h4 class="signature"><a href="OffsetMetadataAndError.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetMetadataAndError</span><span class="params">(<span name="offset">offset: Long</span>, <span name="metadata">metadata: String = <span class="default">OffsetMetadataAndError.NoMetadata</span></span>, <span name="error">error: Short = <span class="default">ErrorMapping.NoError</span></span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Convenience case class since (topic, partition) pairs are ubiquitous.</p>
+    </li><li visbl="pub" name="kafka.common.OffsetMetadataTooLargeException">
+      <h4 class="signature"><a href="OffsetMetadataTooLargeException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetMetadataTooLargeException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates the client has specified offset metadata that exceeds the configured
+maximum size in bytes
+</p>
+    </li><li visbl="pub" name="kafka.common.OffsetOutOfRangeException">
+      <h4 class="signature"><a href="OffsetOutOfRangeException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">OffsetOutOfRangeException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates the client has requested a range no longer available on the server
+</p>
+    </li><li visbl="pub" name="kafka.common.QueueFullException">
+      <h4 class="signature"><a href="QueueFullException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">QueueFullException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.ReplicaNotAvailableException">
+      <h4 class="signature"><a href="ReplicaNotAvailableException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ReplicaNotAvailableException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a request is made for partition, but no leader exists for that partition
+</p>
+    </li><li visbl="pub" name="kafka.common.RequestTimedOutException">
+      <h4 class="signature"><a href="RequestTimedOutException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">RequestTimedOutException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Thrown when a produce request times out - i.</p>
+    </li><li visbl="pub" name="kafka.common.StateChangeFailedException">
+      <h4 class="signature"><a href="StateChangeFailedException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">StateChangeFailedException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.ThreadShutdownException">
+      <h4 class="signature"><a href="ThreadShutdownException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ThreadShutdownException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An exception that indicates a thread is being shut down normally.</p>
+    </li><li visbl="pub" name="kafka.common.TopicAndPartition">
+      <h4 class="signature"><a href="TopicAndPartition.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicAndPartition</span><span class="params">(<span name="topic">topic: String</span>, <span name="partition">partition: Int</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Convenience case class since (topic, partition) pairs are ubiquitous.</p>
+    </li><li visbl="pub" name="kafka.common.TopicExistsException">
+      <h4 class="signature"><a href="TopicExistsException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicExistsException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.UnavailableProducerException">
+      <h4 class="signature"><a href="UnavailableProducerException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UnavailableProducerException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates a producer pool initialization problem</p>
+    </li><li visbl="pub" name="kafka.common.UnknownCodecException">
+      <h4 class="signature"><a href="UnknownCodecException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UnknownCodecException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates the client has requested a range no longer available on the server
+</p>
+    </li><li visbl="pub" name="kafka.common.UnknownException">
+      <h4 class="signature"><a href="UnknownException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UnknownException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">If we don't know what else it is, call it this
+</p>
+    </li><li visbl="pub" name="kafka.common.UnknownMagicByteException">
+      <h4 class="signature"><a href="UnknownMagicByteException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UnknownMagicByteException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates the client has requested a range no longer available on the server
+</p>
+    </li><li visbl="pub" name="kafka.common.UnknownTopicOrPartitionException">
+      <h4 class="signature"><a href="UnknownTopicOrPartitionException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">UnknownTopicOrPartitionException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates an unknown topic or a partition id not between 0 and numPartitions-1
+</p>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.common.ErrorMapping">
+      <h4 class="signature"><a href="ErrorMapping$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ErrorMapping</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A bi-directional mapping between error codes and exceptions x
+</p>
+    </li><li visbl="pub" name="kafka.common.OffsetMetadataAndError">
+      <h4 class="signature"><a href="OffsetMetadataAndError$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">OffsetMetadataAndError</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.common.Topic">
+      <h4 class="signature"><a href="Topic$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Topic</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>

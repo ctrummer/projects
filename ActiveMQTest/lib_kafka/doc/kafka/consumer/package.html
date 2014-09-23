@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.consumer</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>consumer</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">consumer</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.consumer.Blacklist">
+      <h4 class="signature"><a href="Blacklist.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Blacklist</span><span class="params">(<span name="rawRegex">rawRegex: String</span>)</span><span class="result"> extends TopicFilter with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ChecksumMessageFormatter">
+      <h4 class="signature"><a href="ChecksumMessageFormatter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ChecksumMessageFormatter</span><span class="result"> extends MessageFormatter</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerConfig">
+      <h4 class="signature"><a href="ConsumerConfig.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerConfig</span><span class="result"> extends ZKConfig</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerConnector">
+      <h4 class="signature"><a href="ConsumerConnector.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">ConsumerConnector</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt"> Main interface for consumer
+</p>
+    </li><li visbl="pub" name="kafka.consumer.ConsumerFetcherManager">
+      <h4 class="signature"><a href="ConsumerFetcherManager.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerFetcherManager</span><span class="result"> extends AbstractFetcherManager</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt"> Usage:
+ Once ConsumerFetcherManager is created, startConnections() and stopAllConnections() can be called repeatedly
+ until shutdown() is called.</p>
+    </li><li visbl="pub" name="kafka.consumer.ConsumerFetcherThread">
+      <h4 class="signature"><a href="ConsumerFetcherThread.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerFetcherThread</span><span class="result"> extends AbstractFetcherThread</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerIterator">
+      <h4 class="signature"><a href="ConsumerIterator.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerIterator</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends IteratorTemplate[MessageAndMetadata[K, V]] with Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">An iterator that blocks until a value can be read from the supplied queue.</p>
+    </li><li visbl="pub" name="kafka.consumer.ConsumerTimeoutException">
+      <h4 class="signature"><a href="ConsumerTimeoutException.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerTimeoutException</span><span class="result"> extends RuntimeException</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerTopicMetrics">
+      <h4 class="signature"><a href="ConsumerTopicMetrics.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerTopicMetrics</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerTopicStats">
+      <h4 class="signature"><a href="ConsumerTopicStats.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ConsumerTopicStats</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Tracks metrics for each topic the given consumer client has consumed data from.</p>
+    </li><li visbl="pub" name="kafka.consumer.DefaultMessageFormatter">
+      <h4 class="signature"><a href="DefaultMessageFormatter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">DefaultMessageFormatter</span><span class="result"> extends MessageFormatter</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.FetchRequestAndResponseMetrics">
+      <h4 class="signature"><a href="FetchRequestAndResponseMetrics.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchRequestAndResponseMetrics</span><span class="result"> extends KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.FetchRequestAndResponseStats">
+      <h4 class="signature"><a href="FetchRequestAndResponseStats.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchRequestAndResponseStats</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Tracks metrics of the requests made by a given consumer client to all brokers, and the responses obtained from the brokers.</p>
+    </li><li visbl="pub" name="kafka.consumer.FetchedDataChunk">
+      <h4 class="signature"><a href="FetchedDataChunk.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FetchedDataChunk</span><span class="params">(<span name="messages">messages: ByteBufferMessageSet</span>, <span name="topicInfo">topicInfo: PartitionTopicInfo</span>, <span name="fetchOffset">fetchOffset: Long</span>)</span><span class="result"> extends Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.KafkaStream">
+      <h4 class="signature"><a href="KafkaStream.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaStream</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends Iterable[MessageAndMetadata[K, V]] with Iterable[MessageAndMetadata[K, V]]</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.MessageFormatter">
+      <h4 class="signature"><a href="MessageFormatter.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">MessageFormatter</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.NoOpMessageFormatter">
+      <h4 class="signature"><a href="NoOpMessageFormatter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NoOpMessageFormatter</span><span class="result"> extends MessageFormatter</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.PartitionTopicInfo">
+      <h4 class="signature"><a href="PartitionTopicInfo.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PartitionTopicInfo</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.SimpleConsumer">
+      <h4 class="signature"><a href="SimpleConsumer.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">SimpleConsumer</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A consumer of kafka messages
+</p>
+    </li><li visbl="pub" name="kafka.consumer.TopicEventHandler">
+      <h4 class="signature"><a href="TopicEventHandler.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">TopicEventHandler</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.TopicFilter">
+      <h4 class="signature"><a href="TopicFilter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">TopicFilter</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: sealed abstract 
+        </div></div>
+          
+    </li><li visbl="pub" name="kafka.consumer.Whitelist">
+      <h4 class="signature"><a href="Whitelist.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Whitelist</span><span class="params">(<span name="rawRegex">rawRegex: String</span>)</span><span class="result"> extends TopicFilter with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ZookeeperTopicEventWatcher">
+      <h4 class="signature"><a href="ZookeeperTopicEventWatcher.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ZookeeperTopicEventWatcher</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.consumer.ConsoleConsumer">
+      <h4 class="signature"><a href="ConsoleConsumer$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ConsoleConsumer</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Consumer that dumps messages out to standard out.</p>
+    </li><li visbl="pub" name="kafka.consumer.Consumer">
+      <h4 class="signature"><a href="Consumer$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Consumer</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerConfig">
+      <h4 class="signature"><a href="ConsumerConfig$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ConsumerConfig</span><span class="result"> extends Config</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.ConsumerTopicStatsRegistry">
+      <h4 class="signature"><a href="ConsumerTopicStatsRegistry$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ConsumerTopicStatsRegistry</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Stores the topic stats information of each consumer client in a (clientId -&gt; ConsumerTopicStats) map.</p>
+    </li><li visbl="pub" name="kafka.consumer.FetchRequestAndResponseStatsRegistry">
+      <h4 class="signature"><a href="FetchRequestAndResponseStatsRegistry$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">FetchRequestAndResponseStatsRegistry</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Stores the fetch request and response stats information of each consumer client in a (clientId -&gt; FetchRequestAndResponseStats) map.</p>
+    </li><li visbl="pub" name="kafka.consumer.MessageFormatter">
+      <h4 class="signature"><a href="MessageFormatter$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">MessageFormatter</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.consumer.PartitionTopicInfo">
+      <h4 class="signature"><a href="PartitionTopicInfo$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">PartitionTopicInfo</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>

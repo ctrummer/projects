@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for kafka.utils</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+
+      <p id="owner"><a href="../package.html" class="extype" name="kafka">kafka</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>utils</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">utils</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment"></div>
+      
+      <div id="template">
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="kafka.utils.Crc32">
+      <h4 class="signature"><a href="Crc32.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Crc32</span><span class="result"> extends Checksum</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.DelayedItem">
+      <h4 class="signature"><a href="DelayedItem.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">DelayedItem</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends Delayed with Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.FileLock">
+      <h4 class="signature"><a href="FileLock.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">FileLock</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A file lock a la flock/funlock</p>
+    </li><li visbl="pub" name="kafka.utils.IteratorTemplate">
+      <h4 class="signature"><a href="IteratorTemplate.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">IteratorTemplate</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends Iterator[T] with Iterator[T]</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Transliteration of the iterator template in google collections.</p>
+    </li><li visbl="pub" name="kafka.utils.KafkaScheduler">
+      <h4 class="signature"><a href="KafkaScheduler.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">KafkaScheduler</span><span class="result"> extends Scheduler with Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A scheduler based on java.</p>
+    </li><li visbl="pub" name="kafka.utils.LeaderExistsOrChangedListener">
+      <h4 class="signature"><a href="LeaderExistsOrChangedListener.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LeaderExistsOrChangedListener</span><span class="result"> extends IZkDataListener with Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Logging">
+      <h4 class="signature"><a href="Logging.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Logging</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Pool">
+      <h4 class="signature"><a href="Pool.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Pool</span><span class="tparams">[<span name="K">K</span>, <span name="V">V</span>]</span><span class="result"> extends Iterable[(K, V)]</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Scheduler">
+      <h4 class="signature"><a href="Scheduler.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Scheduler</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A scheduler for running jobs</p>
+    </li><li visbl="pub" name="kafka.utils.ShutdownableThread">
+      <h4 class="signature"><a href="ShutdownableThread.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ShutdownableThread</span><span class="result"> extends Thread with Logging</span>
+      </span>
+      </a></h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: abstract 
+        </div></div>
+          
+    </li><li visbl="pub" name="kafka.utils.State">
+      <h4 class="signature"><a href="State.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">State</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Throttler">
+      <h4 class="signature"><a href="Throttler.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Throttler</span><span class="result"> extends Logging with KafkaMetricsGroup</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A class to measure and throttle the rate of some process.</p>
+    </li><li visbl="pub" name="kafka.utils.Time">
+      <h4 class="signature"><a href="Time.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Time</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A mockable interface for time functions
+</p>
+    </li><li visbl="pub" name="kafka.utils.VerifiableProperties">
+      <h4 class="signature"><a href="VerifiableProperties.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">VerifiableProperties</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.ZKConfig">
+      <h4 class="signature"><a href="ZKConfig.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ZKConfig</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.ZKGroupDirs">
+      <h4 class="signature"><a href="ZKGroupDirs.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ZKGroupDirs</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.ZKGroupTopicDirs">
+      <h4 class="signature"><a href="ZKGroupTopicDirs.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ZKGroupTopicDirs</span><span class="result"> extends ZKGroupDirs</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.immutable">
+      <h4 class="signature"><a href="immutable.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">immutable</span><span class="result"> extends Annotation with StaticAnnotation</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates that the annotated class is immutable
+</p>
+    </li><li visbl="pub" name="kafka.utils.nonthreadsafe">
+      <h4 class="signature"><a href="nonthreadsafe.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">nonthreadsafe</span><span class="result"> extends Annotation with StaticAnnotation</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates that the annotated class is not threadsafe
+</p>
+    </li><li visbl="pub" name="kafka.utils.threadsafe">
+      <h4 class="signature"><a href="threadsafe.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">threadsafe</span><span class="result"> extends Annotation with StaticAnnotation</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Indicates that the annotated class is meant to be threadsafe.</p>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="kafka.utils.CommandLineUtils">
+      <h4 class="signature"><a href="CommandLineUtils$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">CommandLineUtils</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Helper functions for dealing with command line utilities
+</p>
+    </li><li visbl="pub" name="kafka.utils.Crc32">
+      <h4 class="signature"><a href="Crc32$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Crc32</span><span class="result"> extends </span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.DONE">
+      <h4 class="signature"><a href="DONE$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">DONE</span><span class="result"> extends State</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.FAILED">
+      <h4 class="signature"><a href="FAILED$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">FAILED</span><span class="result"> extends State</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Json">
+      <h4 class="signature"><a href="Json$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Json</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt"> A wrapper that synchronizes JSON in scala, which is not threadsafe.</p>
+    </li><li visbl="pub" name="kafka.utils.Log4jController">
+      <h4 class="signature"><a href="Log4jController$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Log4jController</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Mx4jLoader">
+      <h4 class="signature"><a href="Mx4jLoader$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Mx4jLoader</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">If mx4j-tools is in the classpath call maybeLoad to load the HTTP interface of mx4j.</p>
+    </li><li visbl="pub" name="kafka.utils.NOT_READY">
+      <h4 class="signature"><a href="NOT_READY$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">NOT_READY</span><span class="result"> extends State</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Os">
+      <h4 class="signature"><a href="Os$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Os</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.READY">
+      <h4 class="signature"><a href="READY$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">READY</span><span class="result"> extends State</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.SystemTime">
+      <h4 class="signature"><a href="SystemTime$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">SystemTime</span><span class="result"> extends Time</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">The normal system implementation of time functions
+</p>
+    </li><li visbl="pub" name="kafka.utils.Throttler">
+      <h4 class="signature"><a href="Throttler$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Throttler</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.Time">
+      <h4 class="signature"><a href="Time$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Time</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Some common constants
+</p>
+    </li><li visbl="pub" name="kafka.utils.Utils">
+      <h4 class="signature"><a href="Utils$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Utils</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">General helper functions!</p>
+    </li><li visbl="pub" name="kafka.utils.ZKStringSerializer">
+      <h4 class="signature"><a href="ZKStringSerializer$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ZKStringSerializer</span><span class="result"> extends ZkSerializer</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="kafka.utils.ZkUtils">
+      <h4 class="signature"><a href="ZkUtils$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">ZkUtils</span><span class="result"> extends Logging</span>
+      </span>
+      </a></h4>
+      
+    </li></ol>
+            </div>
+                
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>
