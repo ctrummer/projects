@@ -1,14 +1,13 @@
 import java.io.IOException;
 
 import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
 import javax.jms.DeliveryMode;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.hornetq.jms.client.HornetQTopicConnectionFactory;
+import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
 
 class ListenerPublisher {
 
@@ -38,8 +37,17 @@ class ListenerPublisher {
 
 		listener.waitUntilStartSignal(out);
 
-		Connection connection = getConnection();
-		Session session = getSession(connection);
+		// Connection
+		ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
+				Configuration.host, Configuration.port, Configuration.user,
+				Configuration.password);
+		Connection connection = factory.createConnection(Configuration.user,
+				Configuration.password);
+		connection.start();
+
+		// Session Mode !!!
+		Session session = connection.createSession(false,
+				Session.CLIENT_ACKNOWLEDGE);
 
 		// Producer
 		MessageProducer producer = session.createProducer(Configuration
@@ -56,25 +64,6 @@ class ListenerPublisher {
 		connection.close();
 		System.out.println("Publisher<" + publisherID + "> Exit!");
 		System.exit(0);
-	}
-
-	private Session getSession(Connection connection) throws JMSException {
-		// Session Mode !!!
-		Session session = connection.createSession(false,
-				Session.CLIENT_ACKNOWLEDGE);
-		return session;
-	}
-
-	private Connection getConnection() throws JMSException {
-		ConnectionFactory factory = new HornetQTopicConnectionFactory();
-
-		// Configuration.host, Configuration.port, Configuration.user,
-		// Configuration.password);
-
-		Connection connection = factory.createConnection(Configuration.user,
-				Configuration.password);
-		connection.start();
-		return connection;
 	}
 
 	private void sendMessageShutDown(Session session, MessageProducer producer)

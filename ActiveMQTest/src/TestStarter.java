@@ -4,25 +4,11 @@ import java.io.InputStreamReader;
 
 public class TestStarter {
 
-	// private final static String classpath = "./bin;" + //
-	// "./lib/geronimo-jms_1.1_spec-1.1.jar;" + //
-	// "./lib/qpid-amqp-1-0-client-0.26.jar;" + //
-	// "./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
-	// "./lib/qpid-amqp-1-0-common-0.26.jar;";
-	//
-
 	private final static String classpath = "./bin;" + //
-			"./lib_hornet/hornetq-commons-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/hornetq-core-client-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/hornetq-jms-client-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/hornetq-jms-examples-common-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/hornetq-journal-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/hornetq-native-2.4.0.Final.jar" + ";" + //
-			"./lib_hornet/javax.inject-1.jar" + ";" + //
-			"./lib_hornet/jboss-jms-api_2.0_spec-1.0.0.Final.jar" + ";" + //
-			"./lib_hornet/jboss-logging-3.1.0.GA.jar" + ";" + //
-			"./lib_hornet/jgroups-3.3.4.Final.jar" + ";" + //
-			"./lib_hornet/netty-all-4.0.13.Final.jar" + ";";
+			"./lib/geronimo-jms_1.1_spec-1.1.jar;" + //
+			"./lib/qpid-amqp-1-0-client-0.26.jar;" + //
+			"./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
+			"./lib/qpid-amqp-1-0-common-0.26.jar;";
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
@@ -43,16 +29,17 @@ public class TestStarter {
 			out.writeln("Listener number " + listenerCounter + " started.");
 		}
 
-		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
-			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
-					+ publisherCounter);
-			System.out.println("Publisher number " + publisherCounter
-					+ " started.");
-		}
-
-		Thread.sleep(10000);
-
-		createSubVm("java", "-cp", classpath, "PublishersStarter");
+		// for (int publisherCounter = 1; publisherCounter <=
+		// Configuration.numberOfPublishers; publisherCounter++) {
+		// createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
+		// + publisherCounter);
+		// System.out.println("Publisher number " + publisherCounter
+		// + " started.");
+		// }
+		//
+		// Thread.sleep(10000);
+		//
+		// createSubVm("java", "-cp", classpath, "PublishersStarter");
 
 		out.writeln("PublisherStarter started.");
 		out.writeln("TestStarter finished.");
