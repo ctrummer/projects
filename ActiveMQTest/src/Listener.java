@@ -10,10 +10,14 @@ import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.jms.HornetQJMSClient;
+import org.hornetq.api.jms.JMSFactoryType;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.hornetq.jms.client.HornetQConnectionFactory;
+import org.hornetq.jms.client.HornetQTopic;
 // TODO think about this
 // session.createBrowser(queue) instead of session.createConsumer(dest);
-import org.apache.qpid.amqp_1_0.jms.impl.TopicImpl;
 
 // TODO receive processing acknowdlege
 // reciever vs. browser
@@ -26,8 +30,8 @@ class Listener {
 		listener.readMessageBulk();
 	}
 
-	private TopicImpl dest;
-	private ConnectionFactoryImpl factory;
+	private HornetQTopic dest;
+	private HornetQConnectionFactory factory;
 	private Connection connection;
 	private Session session;
 	private MessageConsumer consumer;
@@ -45,7 +49,7 @@ class Listener {
 			throws JMSException, IOException {
 		this.filter = filter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
-		dest = new TopicImpl(source); // Configuration.getDestination(source);
+		dest = new HornetQTopic(source); // Configuration.getDestination(source);
 		listenerID = id;
 		out = new OutputWriter("./log/" + listenerID + ".txt");
 		out.writeln("Listener" + listenerID + " started");
@@ -56,8 +60,13 @@ class Listener {
 	}
 
 	private void initListener() throws JMSException {
-		factory = new ConnectionFactoryImpl(Configuration.host,
-				Configuration.port, Configuration.user, Configuration.password);
+		TransportConfiguration transportConfiguration = new TransportConfiguration(
+				NettyConnectorFactory.class.getName());
+		factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
+				JMSFactoryType.TOPIC_CF, transportConfiguration);
+
+		// factory = new HornetQConnectionFactory(Configuration.host,
+		// Configuration.port, Configuration.user, Configuration.password);
 
 		connection = factory.createConnection(Configuration.user,
 				Configuration.password);
@@ -68,12 +77,15 @@ class Listener {
 
 		if (filter.equalsIgnoreCase("all")) {
 			// consumer = session.createConsumer(dest);
-			consumer = session.createDurableSubscriber(dest, listenerID);
+			consumer = session.createDurableConsumer(dest, listenerID);
+			// consumer = session.createDurableSubscriber(dest, listenerID);
 		} else {
 			// consumer = session.createConsumer(dest, "publisher = '" + filter
 			// + "'");
-			consumer = session.createDurableSubscriber(dest, listenerID,
+			consumer = session.createDurableConsumer(dest, listenerID,
 					"publisher = '" + filter + "'", false);
+			// consumer = session.createDurableSubscriber(dest, listenerID,
+			// "publisher = '" + filter + "'", false);
 
 		}
 	}

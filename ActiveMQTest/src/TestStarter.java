@@ -6,15 +6,28 @@ public class TestStarter {
 
 	private final static String baseDir = "/Users/ctrummer/git/projects/ActiveMQTest/";
 
-	private final static String classpath = "./;" + "./bin/;" + // baseDir + ";"
-																// + baseDir +
-																// "bin/;"
-																// +
-																// //
-			"./lib/geronimo-jms_1.1_spec-1.1.jar;" + //
+	// ActiveMQ classpath
+	private final static String actieMQclasspath = "./;" + "./bin/;"
+			+ "./lib/geronimo-jms_1.1_spec-1.1.jar;" + //
 			"./lib/qpid-amqp-1-0-client-0.26.jar;" + //
 			"./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
 			"./lib/qpid-amqp-1-0-common-0.26.jar;";
+
+	private final static String classpath = "./;" + "./bin/;" + //
+
+			"./lib_hornet/hornetq-commons-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-core-client-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-jms-client-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-jms-examples-common-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-jms-server-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-journal-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-native-2.4.0.Final.jar;" + //
+			"./lib_hornet/hornetq-server-2.4.0.Final.jar;" + //
+			"./lib_hornet/javax.inject-1.jar;" + //
+			"./lib_hornet/jboss-jms-api_2.0_spec-1.0.0.Final.jar;" + //
+			"./lib_hornet/jboss-logging-3.1.0.GA.jar;" + //
+			"./lib_hornet/jgroups-3.3.4.Final.jar;" + //
+			"./lib_hornet/netty-all-4.0.13.Final.jar;";
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {

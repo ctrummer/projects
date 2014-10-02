@@ -7,7 +7,11 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.apache.qpid.amqp_1_0.jms.impl.ConnectionFactoryImpl;
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.jms.HornetQJMSClient;
+import org.hornetq.api.jms.JMSFactoryType;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.hornetq.jms.client.HornetQConnectionFactory;
 
 class ListenerPublisher {
 
@@ -19,6 +23,7 @@ class ListenerPublisher {
 
 	private String publisherID;
 	private OutputWriter out;
+	private HornetQConnectionFactory factory;
 
 	public ListenerPublisher(String publisherID) {
 		this.publisherID = publisherID;
@@ -38,9 +43,15 @@ class ListenerPublisher {
 		listener.waitUntilStartSignal(out);
 
 		// Connection
-		ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
-				Configuration.host, Configuration.port, Configuration.user,
-				Configuration.password);
+		// ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
+		// Configuration.host, Configuration.port, Configuration.user,
+		// Configuration.password);
+
+		TransportConfiguration transportConfiguration = new TransportConfiguration(
+				NettyConnectorFactory.class.getName());
+		factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
+				JMSFactoryType.TOPIC_CF, transportConfiguration);
+
 		Connection connection = factory.createConnection(Configuration.user,
 				Configuration.password);
 		connection.start();
