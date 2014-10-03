@@ -13,7 +13,7 @@ public class TestStarter {
 			"./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
 			"./lib/qpid-amqp-1-0-common-0.26.jar;";
 
-	private final static String classpath = "./;" + "./bin/;" + //
+	private final static String classpathHornetQ = "./;" + "./bin/;" + //
 
 			"./lib_hornet/hornetq-commons-2.4.0.Final.jar;" + //
 			"./lib_hornet/hornetq-core-client-2.4.0.Final.jar;" + //
@@ -28,6 +28,10 @@ public class TestStarter {
 			"./lib_hornet/jboss-logging-3.1.0.GA.jar;" + //
 			"./lib_hornet/jgroups-3.3.4.Final.jar;" + //
 			"./lib_hornet/netty-all-4.0.13.Final.jar;";
+
+	private final static String classpath = "./;" + "./bin/;" + //
+			"./lib_openmq/jms.jar;" + //
+			"./lib_openmq/imq.jar;";
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {

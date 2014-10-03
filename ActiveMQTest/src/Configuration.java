@@ -1,6 +1,7 @@
 import javax.jms.Destination;
+import javax.jms.JMSException;
 
-import org.hornetq.jms.client.HornetQTopic;
+import com.sun.messaging.Topic;
 
 public class Configuration {
 	public static final String user = "guest";
@@ -24,10 +25,11 @@ public class Configuration {
 		return messageText;
 	}
 
-	public static Destination getDestination(String destination) {
+	public static Destination getDestination(String destination)
+			throws JMSException {
 		Destination dest = null;
 
-		dest = new HornetQTopic(destination);
+		dest = new Topic(destination);
 		// dest = HornetQJMSClient.createTopic(destination);
 
 		return dest;

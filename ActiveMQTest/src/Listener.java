@@ -9,15 +9,11 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
-
-import org.hornetq.api.core.TransportConfiguration;
-import org.hornetq.api.jms.HornetQJMSClient;
-import org.hornetq.api.jms.JMSFactoryType;
-import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
-import org.hornetq.jms.client.HornetQConnectionFactory;
-import org.hornetq.jms.client.HornetQTopic;
 // TODO think about this
 // session.createBrowser(queue) instead of session.createConsumer(dest);
+import javax.jms.Topic;
+
+import com.sun.messaging.ConnectionFactory;
 
 // TODO receive processing acknowdlege
 // reciever vs. browser
@@ -30,8 +26,8 @@ class Listener {
 		listener.readMessageBulk();
 	}
 
-	private HornetQTopic dest;
-	private HornetQConnectionFactory factory;
+	private Topic dest;
+	private ConnectionFactory factory;
 	private Connection connection;
 	private Session session;
 	private MessageConsumer consumer;
@@ -49,7 +45,7 @@ class Listener {
 			throws JMSException, IOException {
 		this.filter = filter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
-		dest = new HornetQTopic(source); // Configuration.getDestination(source);
+		dest = new com.sun.messaging.Topic(source); // Configuration.getDestination(source);
 		listenerID = id;
 		out = new OutputWriter("./log/" + listenerID + ".txt");
 		out.writeln("Listener" + listenerID + " started");
@@ -60,16 +56,11 @@ class Listener {
 	}
 
 	private void initListener() throws JMSException {
-		TransportConfiguration transportConfiguration = new TransportConfiguration(
-				NettyConnectorFactory.class.getName());
-		factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
-				JMSFactoryType.TOPIC_CF, transportConfiguration);
+		factory = new ConnectionFactory();
+		connection = factory.createTopicConnection();
 
-		// factory = new HornetQConnectionFactory(Configuration.host,
-		// Configuration.port, Configuration.user, Configuration.password);
-
-		connection = factory.createConnection(Configuration.user,
-				Configuration.password);
+		// connection = factory.createConnection(Configuration.user,
+		// Configuration.password);
 		connection.setClientID(listenerID);
 		connection.start();
 

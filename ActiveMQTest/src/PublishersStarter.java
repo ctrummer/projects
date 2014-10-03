@@ -6,16 +6,13 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import org.hornetq.api.core.TransportConfiguration;
-import org.hornetq.api.jms.HornetQJMSClient;
-import org.hornetq.api.jms.JMSFactoryType;
-import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
-import org.hornetq.jms.client.HornetQConnectionFactory;
+import com.sun.messaging.ConnectionFactory;
 
 class PublishersStarter {
 
 	private OutputWriter out;
-	private HornetQConnectionFactory factory;
+	private ConnectionFactory factory;
+	private Connection connection;
 
 	public static void main(String[] args) throws Exception {
 		PublishersStarter publisher = new PublishersStarter();
@@ -49,10 +46,8 @@ class PublishersStarter {
 		// Configuration.host, Configuration.port, Configuration.user,
 		// Configuration.password);
 
-		TransportConfiguration transportConfiguration = new TransportConfiguration(
-				NettyConnectorFactory.class.getName());
-		factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
-				JMSFactoryType.TOPIC_CF, transportConfiguration);
+		factory = new ConnectionFactory();
+		connection = factory.createTopicConnection();
 
 		Connection connection = factory.createConnection(Configuration.user,
 				Configuration.password);
