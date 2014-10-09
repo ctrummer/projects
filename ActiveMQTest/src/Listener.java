@@ -94,7 +94,8 @@ class Listener {
 					if (shutDownCounter == Configuration.numberOfPublishers
 							|| !filter.equals("all")) {
 						connection.close();
-						calculateResults(messages);
+						calculateSimpleResult(messages);
+						// calculateResults(messages);
 						System.out
 								.println("Listener<" + listenerID + "> Exit!");
 						;
@@ -111,6 +112,38 @@ class Listener {
 			}
 		}
 
+	}
+
+	private void calculateSimpleResult(List<TimeMessage> messages)
+			throws JMSException {
+		int numberOfMessages = messages.size();
+		double startTime = messages.get(0).time;
+		double endTime = messages.get(numberOfMessages - 1).time;
+		double totalTime = endTime - startTime;
+		double averageTime = ((endTime - startTime) * 1000) / numberOfMessages;
+		System.out
+				.printf("Listener<%10s>: Total Time: %10.2f Message Count: %6d #1000: %10.2f %n",
+						listenerID, totalTime, numberOfMessages, averageTime);
+		averageRuntime(messages);
+	}
+
+	private void averageRuntime(List<TimeMessage> messageList)
+			throws JMSException {
+
+		double totalRunTime = 0;
+		for (int index = 0; index < messageList.size(); index++) {
+			TimeMessage message = messageList.get(index);
+			double endTime = message.time;
+			double startTime = Long.valueOf(message.message
+					.getStringProperty("time"));
+
+			totalRunTime = totalRunTime + (endTime - startTime);
+		}
+		double averageRunTime = totalRunTime / messageList.size();
+
+		System.out.printf(
+				"Listener<%s> Average runtime over all messages: %6.2f %n",
+				listenerID, averageRunTime);
 	}
 
 	private void calculateResults(List<TimeMessage> allMessages)
@@ -148,24 +181,13 @@ class Listener {
 		System.out.println("Listener <" + listenerID + "> ListenerPublisher <"
 				+ publisher + "> Total time  == " + totalTime);
 
-		int numberOfReceivedMessages = 0;
-		long totalRunTime = 0;
-		for (int index = 0; index < messageList.size(); index++) {
-			TimeMessage message = messageList.get(index);
-			long endTime = message.time;
-			long startTime = Long.valueOf(message.message
-					.getStringProperty("time"));
-			numberOfReceivedMessages++;
-			totalRunTime = totalRunTime + (endTime - startTime);
-		}
-		double averageRunTime = (totalRunTime * 1.0)
-				/ (numberOfReceivedMessages * 1.0);
-		out.writeln("Average time per message for ListenerPubliser" + publisher
-				+ " == " + averageRunTime);
-		System.out
-				.println("Listener <" + listenerID + "> ListenerPublisher <"
-						+ publisher + "> Average time per message == "
-						+ averageRunTime);
+		averageRuntime(publisher, messageList);
+
+	}
+
+	private void averageRuntime(int publisher, List<TimeMessage> messageList)
+			throws JMSException {
+		averageRuntime(messageList);
 
 	}
 
