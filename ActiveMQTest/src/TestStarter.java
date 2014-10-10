@@ -1,8 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestStarter {
+import javax.jms.JMSException;
+
+public class TestStarter implements ListenerStarter {
 
 	private final static String baseDir = "/Users/ctrummer/git/projects/ActiveMQTest/";
 
@@ -33,23 +36,46 @@ public class TestStarter {
 			"./lib_openmq/jms.jar;" + //
 			"./lib_openmq/imq.jar;";
 
-	public static void main(String[] args) throws IOException,
+	private AtomicInteger listenerCounter;
+
+	private Listener[] listeners;
+
+	public static void main(String[] args) throws IOException, JMSException,
+			InterruptedException {
+		TestStarter starter = new TestStarter();
+		starter.doTheJob();
+	}
+
+	public TestStarter() {
+		super();
+		listenerCounter = new AtomicInteger();
+	}
+
+	private void doTheJob() throws IOException, JMSException,
 			InterruptedException {
 		OutputWriter out = new OutputWriter("./log/TestStarter.txt");
 		out.writeln("TestStarter started.");
 
 		System.out.println("cp == " + classpath);
 
+		listeners = new Listener[Configuration.numberOfSubsribers];
 		for (int listenerCounter = 1; listenerCounter <= Configuration.numberOfSubsribers; listenerCounter++) {
-			if (listenerCounter != Configuration.numberOfSubsribers) {
-				createSubVm("java", "-cp", classpath, "Listener",
-						Configuration.destination_listener, "Listener"
-								+ listenerCounter, "all");
-			} else {
-				createSubVm("java", "-cp", classpath, "Listener",
-						Configuration.destination_listener, "Listener"
-								+ listenerCounter, "1");
-			}
+			// if (listenerCounter != Configuration.numberOfSubsribers) {
+			// createSubVm("java", "-cp", classpath, "Listener",
+			// Configuration.destination_listener, "Listener"
+			// + listenerCounter, "all");
+			// } else {
+			// createSubVm("java", "-cp", classpath, "Listener",
+			// Configuration.destination_listener, "Listener"
+			// + listenerCounter, "1");
+			// }
+
+			// FIXME - start one with filter
+
+			listeners[listenerCounter - 1] = new Listener(
+					Configuration.destination_listener, "Listener"
+							+ listenerCounter, "all", this);
+			listeners[listenerCounter - 1].readMessageBulk();
 
 			out.writeln("Listener number " + listenerCounter + " started.");
 		}
@@ -68,6 +94,24 @@ public class TestStarter {
 		out.writeln("PublisherStarter started.");
 		out.writeln("TestStarter finished.");
 		out.close();
+
+		checkAndClose();
+
+	}
+
+	private void checkAndClose() throws InterruptedException, JMSException {
+		boolean fineshed = false;
+		while (!fineshed) {
+			Thread.sleep(1000);
+			if (listenerCounter.compareAndSet(Configuration.numberOfSubsribers,
+					Configuration.numberOfSubsribers)) {
+				for (Listener listener : listeners) {
+					listener.closeConnection();
+				}
+			}
+
+		}
+
 	}
 
 	public static void createSubVm(String... args) throws IOException {
@@ -103,4 +147,15 @@ public class TestStarter {
 			}
 		}).start();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ListenerStarter#incremenetListenerFinished()
+	 */
+	@Override
+	public void incremenetListenerFinished() throws JMSException {
+		listenerCounter.getAndIncrement();
+	}
+
 }

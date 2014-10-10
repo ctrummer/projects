@@ -2,11 +2,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 // TODO think about this
@@ -19,12 +22,12 @@ import com.sun.messaging.ConnectionFactory;
 // reciever vs. browser
 // wie verhalten sich topic bzw queues beim ack.
 class Listener {
-	public static void main(String[] args) throws JMSException, IOException {
-
-		Listener listener = new Listener(Configuration.destination_listener,
-				args[1], args[2]);
-		listener.readMessageBulk();
-	}
+	// public static void main(String[] args) throws JMSException, IOException {
+	//
+	// Listener listener = new Listener(Configuration.destination_listener,
+	// args[1], args[2]);
+	// listener.readMessageBulk();
+	// }
 
 	private Topic dest;
 	private ConnectionFactory factory;
@@ -34,6 +37,8 @@ class Listener {
 	private String listenerID;
 	private OutputWriter out;
 	private String filter;
+	private AtomicBoolean readyForCLose = new AtomicBoolean();
+	private ListenerStarter starter;
 
 	// public Listener(TopicImpl source) throws JMSException {
 	// dest = source;
@@ -41,9 +46,10 @@ class Listener {
 	// initListener();
 	// }
 
-	public Listener(String source, String id, String filter)
+	public Listener(String source, String id, String filter, ListenerStarter starter)
 			throws JMSException, IOException {
 		this.filter = filter;
+		this.starter = starter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
 		dest = new com.sun.messaging.Topic(source); // Configuration.getDestination(source);
 		listenerID = id;
@@ -56,6 +62,7 @@ class Listener {
 	}
 
 	private void initListener() throws JMSException {
+		readyForCLose.set(false);
 		factory = new ConnectionFactory();
 		connection = factory.createTopicConnection();
 
@@ -84,34 +91,56 @@ class Listener {
 	public void readMessageBulk() throws JMSException {
 		System.out.println("Listener: " + listenerID
 				+ " is waiting for messages...");
-		int shutDownCounter = 0;
-		List<TimeMessage> messages = new ArrayList<TimeMessage>();
-		while (true) {
-			Message msg = consumer.receive();
-			if (msg instanceof TextMessage) {
-				if (msg.getStringProperty("shutdown").equalsIgnoreCase("true")) {
-					shutDownCounter++;
-					if (shutDownCounter == Configuration.numberOfPublishers
-							|| !filter.equals("all")) {
-						connection.close();
-						calculateSimpleResult(messages);
-						// calculateResults(messages);
-						System.out
-								.println("Listener<" + listenerID + "> Exit!");
-						;
-						System.exit(1);
-					}
-				} else {
-					messages.add(new TimeMessage(System.currentTimeMillis(),
-							(TextMessage) msg));
-				}
-			} else {
-				System.out
-						.println("Unexpected message type: " + msg.getClass());
-				System.exit(-1);
-			}
-		}
+		final AtomicInteger shutDownCounter = new AtomicInteger(0);
 
+		final List<TimeMessage> messages = new ArrayList<TimeMessage>();
+
+		consumer.setMessageListener(new MessageListener() {
+
+			@Override
+			public void onMessage(Message msg) {
+				// System.out.println(Thread.currentThread().getId()
+				// + " / received= " + msg);
+
+				try {
+					if (msg instanceof TextMessage) {
+						if (msg.getStringProperty("shutdown").equalsIgnoreCase(
+								"true")) {
+							shutDownCounter.getAndIncrement();
+
+							if (shutDownCounter.get() == Configuration.numberOfPublishers
+									|| !filter.equals("all")) {
+
+								calculateSimpleResult(messages);
+								// connection.close();
+								// calculateResults(messages);
+								// System.out.println("Listener<" + listenerID
+								// + "> Exit!");
+								// // ;
+								// System.exit(1);
+								readyForCLose.set(true);
+								starter.incremenetListenerFinished();
+
+							}
+						} else {
+							messages.add(new TimeMessage(System
+									.currentTimeMillis(), (TextMessage) msg));
+						}
+					} else {
+						System.out.println("Unexpected message type: "
+								+ msg.getClass());
+						System.exit(-1);
+					}
+				} catch (JMSException e) {
+					throw new IllegalStateException(e);
+				}
+			}
+		});
+
+	}
+
+	public void closeConnection() throws JMSException {
+		connection.close();
 	}
 
 	private void calculateSimpleResult(List<TimeMessage> messages)

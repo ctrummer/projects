@@ -9,7 +9,7 @@ import javax.jms.TextMessage;
 
 import com.sun.messaging.ConnectionFactory;
 
-class ListenerPublisher {
+class ListenerPublisher implements ListenerStarter {
 
 	public static void main(String[] args) throws Exception {
 
@@ -21,6 +21,7 @@ class ListenerPublisher {
 	private OutputWriter out;
 	private ConnectionFactory factory;
 	private Connection connection;
+	private Listener listener;
 
 	public ListenerPublisher(String publisherID) {
 		this.publisherID = publisherID;
@@ -32,12 +33,13 @@ class ListenerPublisher {
 		out = new OutputWriter("./log/" + publisherID + ".txt");
 		out.writeln(publisherID + " starts with the job.");
 
-		Listener listener = new Listener(Configuration.destination_starter,
-				publisherID, "all");
+		listener = new Listener(Configuration.destination_starter, publisherID,
+				"all", this);
 
 		out.writeln("Listener created");
 
 		listener.waitUntilStartSignal(out);
+		listener.closeConnection();
 
 		// Connection
 		// ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
@@ -68,6 +70,7 @@ class ListenerPublisher {
 
 		Thread.sleep(1000 * 3);
 		connection.close();
+
 		System.out.println("Publisher<" + publisherID + "> Exit!");
 		System.exit(0);
 	}
@@ -108,4 +111,8 @@ class ListenerPublisher {
 
 	}
 
+	@Override
+	public void incremenetListenerFinished() throws JMSException {
+		// immediately closed after receiving start signal
+	}
 }
