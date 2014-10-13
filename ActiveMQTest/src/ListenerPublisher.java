@@ -9,7 +9,7 @@ import javax.jms.TextMessage;
 
 import com.sun.messaging.ConnectionFactory;
 
-class ListenerPublisher implements ListenerStarter {
+class ListenerPublisher implements ListenerStarter, Runnable {
 
 	public static void main(String[] args) throws Exception {
 
@@ -18,7 +18,7 @@ class ListenerPublisher implements ListenerStarter {
 	}
 
 	private String publisherID;
-	private OutputWriter out;
+
 	private ConnectionFactory factory;
 	private Connection connection;
 	private Listener listener;
@@ -30,15 +30,14 @@ class ListenerPublisher implements ListenerStarter {
 	private void doTheJob() throws JMSException, InterruptedException,
 			IOException {
 
-		out = new OutputWriter("./log/" + publisherID + ".txt");
-		out.writeln(publisherID + " starts with the job.");
+		System.out.println(publisherID + " starts with the job.");
 
 		listener = new Listener(Configuration.destination_starter, publisherID,
 				"all", this);
 
-		out.writeln("Listener created");
+		System.out.println("Listener created");
 
-		listener.waitUntilStartSignal(out);
+		listener.waitUntilStartSignal();
 		listener.closeConnection();
 
 		// Connection
@@ -71,8 +70,8 @@ class ListenerPublisher implements ListenerStarter {
 		Thread.sleep(1000 * 3);
 		connection.close();
 
-		System.out.println("Publisher<" + publisherID + "> Exit!");
-		System.exit(0);
+		System.out.println("Publisher<" + publisherID + "> finished!");
+
 	}
 
 	private void sendMessageShutDown(Session session, MessageProducer producer)
@@ -114,5 +113,16 @@ class ListenerPublisher implements ListenerStarter {
 	@Override
 	public void incremenetListenerFinished() throws JMSException {
 		// immediately closed after receiving start signal
+	}
+
+	@Override
+	public void run() {
+		try {
+			doTheJob();
+		} catch (JMSException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

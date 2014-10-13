@@ -1,101 +1,59 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.jms.JMSException;
 
 public class TestStarter implements ListenerStarter {
 
-	private final static String baseDir = "/Users/ctrummer/git/projects/ActiveMQTest/";
-
-	// ActiveMQ classpath
-	private final static String actieMQclasspath = "./;" + "./bin/;"
-			+ "./lib/geronimo-jms_1.1_spec-1.1.jar;" + //
-			"./lib/qpid-amqp-1-0-client-0.26.jar;" + //
-			"./lib/qpid-amqp-1-0-client-jms-0.26.jar;" + //
-			"./lib/qpid-amqp-1-0-common-0.26.jar;";
-
-	private final static String classpathHornetQ = "./;" + "./bin/;" + //
-
-			"./lib_hornet/hornetq-commons-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-core-client-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-jms-client-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-jms-examples-common-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-jms-server-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-journal-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-native-2.4.0.Final.jar;" + //
-			"./lib_hornet/hornetq-server-2.4.0.Final.jar;" + //
-			"./lib_hornet/javax.inject-1.jar;" + //
-			"./lib_hornet/jboss-jms-api_2.0_spec-1.0.0.Final.jar;" + //
-			"./lib_hornet/jboss-logging-3.1.0.GA.jar;" + //
-			"./lib_hornet/jgroups-3.3.4.Final.jar;" + //
-			"./lib_hornet/netty-all-4.0.13.Final.jar;";
-
-	private final static String classpath = "./;" + "./bin/;" + //
-			"./lib_openmq/jms.jar;" + //
-			"./lib_openmq/imq.jar;";
-
 	private AtomicInteger listenerCounter;
-
 	private Listener[] listeners;
+	private Thread[] publishers;
 
-	public static void main(String[] args) throws IOException, JMSException,
-			InterruptedException {
+	public static void main(String[] args) {
 		TestStarter starter = new TestStarter();
-		starter.doTheJob();
-	}
-
-	public TestStarter() {
-		super();
-		listenerCounter = new AtomicInteger();
+		try {
+			starter.doTheJob();
+		} catch (IOException | JMSException | InterruptedException e) {
+			System.out.println("Something went wrong");
+			e.printStackTrace();
+		}
 	}
 
 	private void doTheJob() throws IOException, JMSException,
 			InterruptedException {
-		OutputWriter out = new OutputWriter("./log/TestStarter.txt");
-		out.writeln("TestStarter started.");
 
-		System.out.println("cp == " + classpath);
+		System.out.println("TestStarter started.");
 
+		listenerCounter = new AtomicInteger();
 		listeners = new Listener[Configuration.numberOfSubsribers];
 		for (int listenerCounter = 1; listenerCounter <= Configuration.numberOfSubsribers; listenerCounter++) {
-			// if (listenerCounter != Configuration.numberOfSubsribers) {
-			// createSubVm("java", "-cp", classpath, "Listener",
-			// Configuration.destination_listener, "Listener"
-			// + listenerCounter, "all");
-			// } else {
-			// createSubVm("java", "-cp", classpath, "Listener",
-			// Configuration.destination_listener, "Listener"
-			// + listenerCounter, "1");
-			// }
-
 			// FIXME - start one with filter
-
 			listeners[listenerCounter - 1] = new Listener(
 					Configuration.destination_listener, "Listener"
 							+ listenerCounter, "all", this);
 			listeners[listenerCounter - 1].readMessageBulk();
-
-			out.writeln("Listener number " + listenerCounter + " started.");
+			System.out.println("Listener number " + listenerCounter
+					+ " started.");
 		}
 
+		publishers = new Thread[Configuration.numberOfPublishers];
 		for (int publisherCounter = 1; publisherCounter <= Configuration.numberOfPublishers; publisherCounter++) {
-			createSubVm("java", "-cp", classpath, "ListenerPublisher", ""
-					+ publisherCounter);
+			publishers[publisherCounter - 1] = new Thread(
+					new ListenerPublisher("" + publisherCounter));
+			publishers[publisherCounter - 1].start();
 			System.out.println("Publisher number " + publisherCounter
 					+ " started.");
 		}
 
 		Thread.sleep(10000);
 
-		createSubVm("java", "-cp", classpath, "PublishersStarter");
+		PublishersStarter starter = new PublishersStarter();
+		starter.doTheJob();
 
-		out.writeln("PublisherStarter started.");
-		out.writeln("TestStarter finished.");
-		out.close();
+		System.out.println("PublisherStarter started.");
 
 		checkAndClose();
+		System.out.println("TestStarter normally finished.");
 
 	}
 
@@ -108,51 +66,12 @@ public class TestStarter implements ListenerStarter {
 				for (Listener listener : listeners) {
 					listener.closeConnection();
 				}
+				fineshed = true;
+				System.out.println("Listeners connections closed.");
 			}
-
 		}
-
 	}
 
-	public static void createSubVm(String... args) throws IOException {
-		// ProcessBuilder builder = new ProcessBuilder("java", "-cp", classpath,
-		// args[0], args[1]);
-		ProcessBuilder builder = new ProcessBuilder(args);
-		builder.redirectErrorStream(true);
-
-		final Process p = builder.start();
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String line = null;
-				final BufferedReader reader = new BufferedReader(
-						new InputStreamReader(p.getInputStream()));
-				try {
-					while ((line = reader.readLine()) != null) {
-						System.out.println(line);
-					}
-					p.waitFor();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						reader.close();
-					} catch (IOException e) {
-						/** ignore on close */
-					}
-				}
-			}
-		}).start();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ListenerStarter#incremenetListenerFinished()
-	 */
 	@Override
 	public void incremenetListenerFinished() throws JMSException {
 		listenerCounter.getAndIncrement();

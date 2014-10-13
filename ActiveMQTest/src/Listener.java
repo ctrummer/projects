@@ -35,7 +35,7 @@ class Listener {
 	private Session session;
 	private MessageConsumer consumer;
 	private String listenerID;
-	private OutputWriter out;
+
 	private String filter;
 	private AtomicBoolean readyForCLose = new AtomicBoolean();
 	private ListenerStarter starter;
@@ -46,18 +46,18 @@ class Listener {
 	// initListener();
 	// }
 
-	public Listener(String source, String id, String filter, ListenerStarter starter)
-			throws JMSException, IOException {
+	public Listener(String source, String id, String filter,
+			ListenerStarter starter) throws JMSException, IOException {
 		this.filter = filter;
 		this.starter = starter;
 		System.out.println("Listener<" + id + "> Source  == " + source);
 		dest = new com.sun.messaging.Topic(source); // Configuration.getDestination(source);
 		listenerID = id;
-		out = new OutputWriter("./log/" + listenerID + ".txt");
-		out.writeln("Listener" + listenerID + " started");
+
+		System.out.println("Listener" + listenerID + " started");
 
 		initListener();
-		out.writeln("Initialization done ...");
+		System.out.println("Initialization done ...");
 
 	}
 
@@ -112,12 +112,7 @@ class Listener {
 									|| !filter.equals("all")) {
 
 								calculateSimpleResult(messages);
-								// connection.close();
-								// calculateResults(messages);
-								// System.out.println("Listener<" + listenerID
-								// + "> Exit!");
-								// // ;
-								// System.exit(1);
+
 								readyForCLose.set(true);
 								starter.incremenetListenerFinished();
 
@@ -129,7 +124,7 @@ class Listener {
 					} else {
 						System.out.println("Unexpected message type: "
 								+ msg.getClass());
-						System.exit(-1);
+
 					}
 				} catch (JMSException e) {
 					throw new IllegalStateException(e);
@@ -205,7 +200,7 @@ class Listener {
 		TimeMessage firstMessage = messageList.get(0);
 		TimeMessage lastMessage = messageList.get(messageList.size() - 1);
 		long totalTime = lastMessage.time - firstMessage.time;
-		out.writeln("Listener <" + listenerID + "> ListenerPublisher <"
+		System.out.println("Listener <" + listenerID + "> ListenerPublisher <"
 				+ publisher + "> Total time  == " + totalTime);
 		System.out.println("Listener <" + listenerID + "> ListenerPublisher <"
 				+ publisher + "> Total time  == " + totalTime);
@@ -220,13 +215,13 @@ class Listener {
 
 	}
 
-	public void waitUntilStartSignal(OutputWriter out) throws JMSException {
+	public void waitUntilStartSignal() throws JMSException {
 		while (true) {
 			Message msg = consumer.receive();
 			if (msg instanceof TextMessage) {
 				String body = ((TextMessage) msg).getText();
 				if ("STARTUP".equals(body)) {
-					out.writeln("Startup message received ...");
+					System.out.println("Startup message received ...");
 					connection.close();
 					break;
 				}

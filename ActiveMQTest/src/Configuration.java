@@ -14,7 +14,7 @@ public class Configuration {
 	public static final int sizeOfTestMessages = 256;
 
 	private static final String DATA = "abcdefghijklmnopqrstuvwxyz";
-	public static int numberOfPublishers = 16;
+	public static int numberOfPublishers = 32;
 	public static int numberOfSubsribers = 32;
 
 	public static String createMessageText(int messageSize) {
