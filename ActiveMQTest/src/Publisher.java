@@ -8,99 +8,105 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import com.sun.messaging.ConnectionFactory;
-
 class Publisher implements Runnable {
 
-  private String publisherID;
+	private String publisherID;
+	private Connection connection;
+	private String fillUpString;
 
-  private ConnectionFactory factory;
-  private Connection connection;
+	public Publisher(String publisherID) {
+		this.publisherID = publisherID;
+		fillUpString = Configuration
+				.createMessageText(Configuration.sizeOfTestMessages);
+	}
 
-  private String fillUpString;
+	private void doTheJob() throws JMSException, InterruptedException,
+			IOException {
 
-  public Publisher(String publisherID) {
-    this.publisherID = publisherID;
-    fillUpString = Configuration.createMessageText(Configuration.sizeOfTestMessages);
-  }
+		System.out
+				.println("Publisher " + publisherID + " starts with the job.");
+		Session session = null;
+		MessageProducer producer = null;
+		try {
+			connection = Configuration.getConnectionForPublisher();
+			connection.start();
 
-  private void doTheJob() throws JMSException, InterruptedException, IOException {
+			// Session Mode !!!
+			session = connection.createSession(false,
+					Session.CLIENT_ACKNOWLEDGE);
 
-    System.out.println("Publisher " + publisherID + " starts with the job.");
-    Session session = null;
-    MessageProducer producer = null;
-    try {
-      factory = new ConnectionFactory();
-      connection = factory.createTopicConnection();
+			// Producer
+			producer = session.createProducer(Configuration
+					.getDestination(Configuration.destination_listener));
+			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 
-      connection.start();
+			// send a bulk of messages
+			sendMessageBulk(session, producer);
 
-      // Session Mode !!!
-      session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
+			// send a shutdown message
+			sendMessageShutDown(session, producer);
+		} finally {
+			if (producer != null) {
+				producer.close();
+			}
+			if (session != null) {
+				session.close();
+			}
+			connection.close();
+		}
 
-      // Producer
-      producer = session.createProducer(Configuration.getDestination(Configuration.destination_listener));
-      producer.setDeliveryMode(DeliveryMode.PERSISTENT);
+		System.out.println("Publisher<" + publisherID + "> finished!");
 
-      // send a bulk of messages
-      sendMessageBulk(session, producer);
+	}
 
-      // send a shutdown message
-      sendMessageShutDown(session, producer);
-    } finally {
-      if (producer != null) {
-        producer.close();
-      }
-      if (session != null) {
-        session.close();
-      }
-      connection.close();
-    }
+	private void sendMessageShutDown(Session session, MessageProducer producer)
+			throws JMSException {
 
-    System.out.println("Publisher<" + publisherID + "> finished!");
+		TextMessage msg = session.createTextMessage("SHUTDOWN");
+		msg.setStringProperty("publisher", publisherID);
+		msg.setStringProperty("time", System.nanoTime() + "");
+		msg.setStringProperty("shutdown", "true");
+		producer.send(msg);
+	}
 
-  }
+	private void sendMessageBulk(Session session, MessageProducer producer)
+			throws JMSException {
 
-  private void sendMessageShutDown(Session session, MessageProducer producer) throws JMSException {
+		long startSendingTime = System.nanoTime();
 
-    TextMessage msg = session.createTextMessage("SHUTDOWN");
-    msg.setStringProperty("publisher", publisherID);
-    msg.setStringProperty("time", System.nanoTime() + "");
-    msg.setStringProperty("shutdown", "true");
-    producer.send(msg);
-  }
+		for (int i = 1; i <= Configuration.numberOfTestMessages; i++) {
+			long currentTime = System.nanoTime();
 
-  private void sendMessageBulk(Session session, MessageProducer producer) throws JMSException {
+			TextMessage msg = session.createTextMessage("#:" + publisherID
+					+ " t:" + currentTime + " s:" + fillUpString);
 
-    long startSendingTime = System.nanoTime();
+			msg.setStringProperty("publisher", publisherID);
+			msg.setStringProperty("time", currentTime + "");
+			msg.setStringProperty("shutdown", "false");
 
-    for (int i = 1; i <= Configuration.numberOfTestMessages; i++) {
-      long currentTime = System.nanoTime();
+			producer.send(msg);
 
-      TextMessage msg = session.createTextMessage("#:" + publisherID + " t:" + currentTime + " s:" + fillUpString);
+		}
 
-      msg.setStringProperty("publisher", publisherID);
-      msg.setStringProperty("time", currentTime + "");
-      msg.setStringProperty("shutdown", "false");
+		long stopSendingTime = System.nanoTime();
 
-      producer.send(msg);
+		System.out.println("Publisher: "
+				+ publisherID
+				+ " needed total time for creating and sending "
+				+ Configuration.numberOfTestMessages
+				+ " messages: "
+				+ TimeUnit.NANOSECONDS
+						.toMillis((stopSendingTime - startSendingTime)));
 
-    }
+	}
 
-    long stopSendingTime = System.nanoTime();
+	@Override
+	public void run() {
+		try {
+			doTheJob();
+		} catch (JMSException | InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
 
-    System.out.println("Publisher: " + publisherID + " needed total time for creating and sending " + Configuration.numberOfTestMessages + " messages: "
-      + TimeUnit.NANOSECONDS.toMillis((stopSendingTime - startSendingTime)));
-
-  }
-
-  @Override
-  public void run() {
-    try {
-      doTheJob();
-    } catch (JMSException | InterruptedException | IOException e) {
-      e.printStackTrace();
-    }
-
-  }
+	}
 }

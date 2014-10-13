@@ -16,134 +16,131 @@ import javax.jms.TextMessage;
 // session.createBrowser(queue) instead of session.createConsumer(dest);
 import javax.jms.Topic;
 
-import com.sun.messaging.ConnectionFactory;
-
 // TODO receive processing acknowdlege
 // reciever vs. browser
 // wie verhalten sich topic bzw queues beim ack.
 class Listener {
 
-  private Topic dest;
-  private ConnectionFactory factory;
-  private Connection connection;
-  private Session session;
-  private MessageConsumer consumer;
-  private String listenerID;
+	private Topic dest;
+	private Connection connection;
+	private Session session;
+	private String listenerID;
+	private String filter;
+	private AtomicBoolean isCloseable = new AtomicBoolean();
+	private ListenerStarter starter;
+	private String topic;
 
-  private String filter;
-  private AtomicBoolean isCloseable = new AtomicBoolean();
-  private ListenerStarter starter;
-  private String topic;
+	public Listener(String topic, String id, String filter,
+			ListenerStarter starter) throws JMSException, IOException {
+		this.topic = topic;
+		this.filter = filter;
+		this.starter = starter;
+		System.out.println("Listener<" + id + "> Source  == " + topic);
+		listenerID = id;
 
-  public Listener(String topic, String id, String filter, ListenerStarter starter) throws JMSException, IOException {
-    this.topic = topic;
-    this.filter = filter;
-    this.starter = starter;
-    System.out.println("Listener<" + id + "> Source  == " + topic);
-    listenerID = id;
+		initListener();
+		System.out.println("Listener" + listenerID + " started");
 
-    initListener();
-    System.out.println("Listener" + listenerID + " started");
+	}
 
-  }
+	private void initListener() throws JMSException {
+		isCloseable.set(false);
 
-  private void initListener() throws JMSException {
-    isCloseable.set(false);
-    
-    factory = new ConnectionFactory();
-    //FIXME use Configuration.getConnection();
-    connection = factory.createTopicConnection();
-    
+		connection = Configuration.getConnection();
+		connection.setClientID(listenerID);
+		connection.start();
 
-    connection.setClientID(listenerID);
-    connection.start();
+		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		dest = session.createTopic(topic);
 
-    session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-    dest = session.createTopic(this.topic);
+		MessageConsumer consumer = Configuration.createConsumer(session,
+				listenerID, dest, filter);
+		setListener(consumer);
+	}
 
-    if (filter.equalsIgnoreCase("all")) {
-      consumer = session.createDurableConsumer(dest, listenerID);
-    } else {
-      consumer = session.createDurableConsumer(dest, listenerID, "publisher = '" + filter + "'", false);
-    }
+	public void setListener(MessageConsumer consumer) throws JMSException {
+		System.out.println("Listener: " + listenerID
+				+ " is waiting for messages...");
+		final AtomicInteger shutDownCounter = new AtomicInteger(0);
 
-    setListener();
+		// Create fully size array so no resize needs to be done
+		final List<TimeMessage> messages = new ArrayList<TimeMessage>(
+				Configuration.numberOfTestMessages
+						* Configuration.numberOfPublishers);
 
-  }
+		consumer.setMessageListener(new MessageListener() {
 
-  public void setListener() throws JMSException {
-    System.out.println("Listener: " + listenerID + " is waiting for messages...");
-    final AtomicInteger shutDownCounter = new AtomicInteger(0);
+			@Override
+			public void onMessage(Message msg) {
 
-    //Create fully size array so no resize needs to be done
-    final List<TimeMessage> messages = new ArrayList<TimeMessage>(Configuration.numberOfTestMessages * Configuration.numberOfPublishers);
+				try {
+					if (!(msg instanceof TextMessage)) {
+						System.out.println("Unexpected message type: "
+								+ msg.getClass());
+						return;
+					}
 
-    consumer.setMessageListener(new MessageListener() {
+					if (msg.getStringProperty("shutdown").equalsIgnoreCase(
+							"true")) {
+						shutDownCounter.getAndIncrement();
 
-      @Override
-      public void onMessage(Message msg) {
+						if (shutDownCounter.get() == Configuration.numberOfPublishers
+								|| !filter.equals("all")) {
 
-        try {
-          if (!(msg instanceof TextMessage)) {
-            System.out.println("Unexpected message type: " + msg.getClass());
-            return;
-          }
+							calculateSimpleResult(messages);
 
-          if (msg.getStringProperty("shutdown").equalsIgnoreCase("true")) {
-            shutDownCounter.getAndIncrement();
+							isCloseable.set(true);
+							starter.incremenetListenerFinished();
 
-            if (shutDownCounter.get() == Configuration.numberOfPublishers || !filter.equals("all")) {
+						}
+					} else {
+						messages.add(new TimeMessage((TextMessage) msg));
+					}
+				} catch (JMSException e) {
+					throw new IllegalStateException(e);
+				}
+			}
+		});
 
-              calculateSimpleResult(messages);
+	}
 
-              isCloseable.set(true);
-              starter.incremenetListenerFinished();
+	public void closeConnection() throws JMSException {
+		connection.close();
+	}
 
-            }
-          } else {
-            messages.add(new TimeMessage((TextMessage) msg));
-          }
-        } catch (JMSException e) {
-          throw new IllegalStateException(e);
-        }
-      }
-    });
+	private void calculateSimpleResult(List<TimeMessage> messages)
+			throws JMSException {
+		int numberOfMessages = messages.size();
+		double startTime = messages.get(0).receivedAt;
+		double endTime = messages.get(numberOfMessages - 1).receivedAt;
+		double totalTime = endTime - startTime;
+		double averageTime = ((endTime - startTime) / numberOfMessages) * 1000;
+		long averageOverallTime = averageRuntime(messages);
+		System.out
+				.printf("Listener<%10s>: Total Time: %10d ms \tMessage Count: %6d \t#1000: %10d ms \taverage travel time per message:  %10d ms %n",
+						listenerID, TimeUnit.NANOSECONDS.toMillis(Double
+								.valueOf(totalTime).longValue()),
+						numberOfMessages, TimeUnit.NANOSECONDS.toMillis(Double
+								.valueOf(averageTime).longValue()),
+						TimeUnit.NANOSECONDS.toMillis(averageOverallTime));
+	}
 
-  }
+	private long averageRuntime(List<TimeMessage> messageList)
+			throws JMSException {
 
-  public void closeConnection() throws JMSException {
-    connection.close();
-  }
+		double totalRunTime = 0;
 
-  private void calculateSimpleResult(List<TimeMessage> messages) throws JMSException {
-    int numberOfMessages = messages.size();
-    double startTime = messages.get(0).receivedAt;
-    double endTime = messages.get(numberOfMessages - 1).receivedAt;
-    double totalTime = endTime - startTime;
-    double averageTime = ((endTime - startTime) / numberOfMessages) * 1000;
-    long averageOverallTime = averageRuntime(messages);
-    System.out.printf("Listener<%10s>: Total Time: %10d ms \tMessage Count: %6d \t#1000: %10d ms \taverage travel time per message:  %10d ms %n",
-                      listenerID,
-                      TimeUnit.NANOSECONDS.toMillis(Double.valueOf(totalTime).longValue()),
-                      numberOfMessages,
-                      TimeUnit.NANOSECONDS.toMillis(Double.valueOf(averageTime).longValue()),
-                      TimeUnit.NANOSECONDS.toMillis(averageOverallTime));
-  }
+		for (TimeMessage message : messageList) {
+			double endTime = message.receivedAt;
+			double startTime = Long.valueOf(message.message
+					.getStringProperty("time"));
+			totalRunTime = totalRunTime + (endTime - startTime);
+		}
 
-  private long averageRuntime(List<TimeMessage> messageList) throws JMSException {
+		double averageRunTime = totalRunTime / messageList.size();
 
-    double totalRunTime = 0;
+		return Double.valueOf(averageRunTime).longValue();
 
-    for (TimeMessage message : messageList) {
-      double endTime = message.receivedAt;
-      double startTime = Long.valueOf(message.message.getStringProperty("time"));
-      totalRunTime = totalRunTime + (endTime - startTime);
-    }
-
-    double averageRunTime = totalRunTime / messageList.size();
-
-    return Double.valueOf(averageRunTime).longValue();
-
-  }
+	}
 
 }
