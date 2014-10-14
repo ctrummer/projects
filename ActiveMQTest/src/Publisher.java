@@ -28,7 +28,7 @@ class Publisher implements Runnable {
 		Session session = null;
 		MessageProducer producer = null;
 		try {
-			connection = Configuration.getConnectionForPublisher();
+			connection = Configuration.getConnection();
 			connection.start();
 
 			// Session Mode !!!

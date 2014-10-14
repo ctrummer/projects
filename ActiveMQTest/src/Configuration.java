@@ -3,7 +3,6 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
-import javax.jms.TopicConnection;
 
 import com.sun.messaging.ConnectionFactory;
 import com.sun.messaging.Topic;
@@ -32,27 +31,31 @@ public class Configuration {
 
 	public static Destination getDestination(String destination)
 			throws JMSException {
-		Destination dest = null;
+		return getDestinationOpenMQ(destination);
+	}
 
-		dest = new Topic(destination);
-		// dest = HornetQJMSClient.createTopic(destination);
-
-		return dest;
+	private static Destination getDestinationOpenMQ(String destination)
+			throws JMSException {
+		return new Topic(destination);
 	}
 
 	public static Connection getConnection() throws JMSException {
+		return getConnectionOpenMQ();
+	}
+
+	private static Connection getConnectionOpenMQ() throws JMSException {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.createTopicConnection();
 		return connection;
 	}
 
-	public static Connection getConnectionForPublisher() throws JMSException {
-		ConnectionFactory factory = new ConnectionFactory();
-		TopicConnection connection = factory.createTopicConnection();
-		return connection;
+	public static MessageConsumer createConsumer(Session session,
+			String listenerID, javax.jms.Topic dest, String filter)
+			throws JMSException {
+		return createConsumerOpenMQ(session, listenerID, dest, filter);
 	}
 
-	public static MessageConsumer createConsumer(Session session,
+	private static MessageConsumer createConsumerOpenMQ(Session session,
 			String listenerID, javax.jms.Topic dest, String filter)
 			throws JMSException {
 		MessageConsumer consumer;
@@ -66,108 +69,3 @@ public class Configuration {
 	}
 
 }
-
-
-// Listener ActiveMQ
-
-private void initListener() throws JMSException {
-    factory = new ConnectionFactoryImpl(Configuration.host,
-            Configuration.port, Configuration.user, Configuration.password);
-
-    connection = factory.createConnection(Configuration.user,
-            Configuration.password);
-    connection.setClientID(listenerID);
-    connection.start();
-
-    session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-    if (filter.equalsIgnoreCase("all")) {
-        // consumer = session.createConsumer(dest);
-        consumer = session.createDurableSubscriber(dest, listenerID);
-    } else {
-        // consumer = session.createConsumer(dest, "publisher = '" + filter
-        // + "'");
-        consumer = session.createDurableSubscriber(dest, listenerID,
-                "publisher = '" + filter + "'", false);
-
-    }
-}
-
-// Listener HornetQ
-private void initListener() throws JMSException {
-    TransportConfiguration transportConfiguration = new TransportConfiguration(
-            NettyConnectorFactory.class.getName());
-    factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
-            JMSFactoryType.TOPIC_CF, transportConfiguration);
-
-    // factory = new HornetQConnectionFactory(Configuration.host,
-    // Configuration.port, Configuration.user, Configuration.password);
-
-    connection = factory.createConnection(Configuration.user,
-            Configuration.password);
-    connection.setClientID(listenerID);
-    connection.start();
-
-    session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-    if (filter.equalsIgnoreCase("all")) {
-        // consumer = session.createConsumer(dest);
-        consumer = session.createDurableConsumer(dest, listenerID);
-        // consumer = session.createDurableSubscriber(dest, listenerID);
-    } else {
-        // consumer = session.createConsumer(dest, "publisher = '" + filter
-        // + "'");
-        consumer = session.createDurableConsumer(dest, listenerID,
-                "publisher = '" + filter + "'", false);
-        // consumer = session.createDurableSubscriber(dest, listenerID,
-        // "publisher = '" + filter + "'", false);
-
-    }
-}
-
-
-// Publisher ActieMQ
-
-//Connection
-ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
-        Configuration.host, Configuration.port, Configuration.user,
-        Configuration.password);
-Connection connection = factory.createConnection(Configuration.user,
-        Configuration.password);
-connection.start();
-
-// Session Mode !!!
-Session session = connection.createSession(false,
-        Session.CLIENT_ACKNOWLEDGE);
-
-// Producer
-MessageProducer producer = session.createProducer(Configuration
-        .getDestination(Configuration.destination_listener));
-producer.setDeliveryMode(DeliveryMode.PERSISTENT);
-
-// send a bulk of messages
-sendMessageBulk(session, producer);
-
-
-// Publisher HornetQ
-TransportConfiguration transportConfiguration = new TransportConfiguration(
-        NettyConnectorFactory.class.getName());
-factory = HornetQJMSClient.createConnectionFactoryWithoutHA(
-        JMSFactoryType.TOPIC_CF, transportConfiguration);
-
-Connection connection = factory.createConnection(Configuration.user,
-        Configuration.password);
-connection.start();
-
-// Session Mode !!!
-Session session = connection.createSession(false,
-        Session.CLIENT_ACKNOWLEDGE);
-
-// Producer
-MessageProducer producer = session.createProducer(Configuration
-        .getDestination(Configuration.destination_listener));
-producer.setDeliveryMode(DeliveryMode.PERSISTENT);
-
-// send a bulk of messages
-sendMessageBulk(session, producer);
-
