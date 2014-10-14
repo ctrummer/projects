@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -63,12 +62,11 @@ class Listener {
 				+ " is waiting for messages...");
 		final AtomicInteger shutDownCounter = new AtomicInteger(0);
 
-		// Create fully size array so no resize needs to be done
-		final List<TimeMessage> messages = new ArrayList<TimeMessage>(
-				Configuration.numberOfTestMessages
-						* Configuration.numberOfPublishers);
-
 		consumer.setMessageListener(new MessageListener() {
+
+			TimeMessage firstMessage = null;
+			TimeMessage lastMessage = null;
+			int numberOfMessages = 0;
 
 			@Override
 			public void onMessage(Message msg) {
@@ -87,25 +85,48 @@ class Listener {
 						if (shutDownCounter.get() == Configuration.numberOfPublishers
 								|| !filter.equals("all")) {
 
-							calculateSimpleResult(messages);
+							calculateSimpleResult(firstMessage, lastMessage,
+									numberOfMessages);
 
 							isCloseable.set(true);
 							starter.incremenetListenerFinished();
 
 						}
 					} else {
-						messages.add(new TimeMessage((TextMessage) msg));
+						lastMessage = new TimeMessage((TextMessage) msg);
+						numberOfMessages++;
+						if (firstMessage == null) {
+							firstMessage = lastMessage;
+						}
+
 					}
 				} catch (JMSException e) {
 					throw new IllegalStateException(e);
 				}
 			}
+
 		});
 
 	}
 
 	public void closeConnection() throws JMSException {
 		connection.close();
+	}
+
+	private void calculateSimpleResult(TimeMessage firstMessage,
+			TimeMessage lastMessage, int numberOfMessages) throws JMSException {
+		double startTime = firstMessage.receivedAt;
+		double endTime = lastMessage.receivedAt;
+		double totalTime = endTime - startTime;
+		double averageTime = (totalTime / numberOfMessages) * 1000;
+		long averageOverallTime = averageRuntime(firstMessage, lastMessage);
+		System.out
+				.printf("Listener<%10s>: Total Time: %10d ms \tMessage Count: %6d \t#1000: %10d ms \taverage travel time per message:  %10d ms %n",
+						listenerID, TimeUnit.NANOSECONDS.toMillis(Double
+								.valueOf(totalTime).longValue()),
+						numberOfMessages, TimeUnit.NANOSECONDS.toMillis(Double
+								.valueOf(averageTime).longValue()),
+						TimeUnit.NANOSECONDS.toMillis(averageOverallTime));
 	}
 
 	private void calculateSimpleResult(List<TimeMessage> messages)
@@ -123,6 +144,15 @@ class Listener {
 						numberOfMessages, TimeUnit.NANOSECONDS.toMillis(Double
 								.valueOf(averageTime).longValue()),
 						TimeUnit.NANOSECONDS.toMillis(averageOverallTime));
+	}
+
+	private long averageRuntime(TimeMessage firstMessage,
+			TimeMessage lastMessage) throws JMSException {
+		long travelTimeFirst = firstMessage.receivedAt
+				- Long.valueOf(firstMessage.message.getStringProperty("time"));
+		long travelTimeLast = lastMessage.receivedAt
+				- Long.valueOf(lastMessage.message.getStringProperty("time"));
+		return (travelTimeFirst + travelTimeLast) / 2;
 	}
 
 	private long averageRuntime(List<TimeMessage> messageList)
