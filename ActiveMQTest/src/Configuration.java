@@ -4,12 +4,16 @@ import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 
-import com.sun.messaging.ConnectionFactory;
-import com.sun.messaging.Topic;
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.jms.HornetQJMSClient;
+import org.hornetq.api.jms.JMSFactoryType;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.hornetq.jms.client.HornetQConnectionFactory;
+import org.hornetq.jms.client.HornetQTopic;
 
 public class Configuration {
-	public static final String user = "admin";
-	public static final String password = "admin";
+	public static final String user = "guest";
+	public static final String password = "guest";
 	public static final String host = "localhost";
 	public static final int port = 1099;
 	public static final String destination_listener = "eventTopic";
@@ -18,8 +22,8 @@ public class Configuration {
 	public static final int sizeOfTestMessages = 256;
 
 	private static final String DATA = "abcdefghijklmnopqrstuvwxyz";
-	public static int numberOfPublishers = 32;
-	public static int numberOfSubsribers = 32;
+	public static int numberOfPublishers = 4;
+	public static int numberOfSubsribers = 4;
 
 	public static String createMessageText(int messageSize) {
 		String messageText = "";
@@ -31,14 +35,20 @@ public class Configuration {
 
 	public static Destination getDestination(String destination)
 			throws JMSException {
-		return getDestinationOpenMQ(destination);
+		// return getDestinationOpenMQ(destination);
 		// return getDestinationActiveMQ(destination);
+		return getDestinationHornetQ(destination);
 	}
 
-	private static Destination getDestinationOpenMQ(String destination)
+	private static Destination getDestinationHornetQ(String destination)
 			throws JMSException {
-		return new Topic(destination);
+		return new HornetQTopic(destination);
 	}
+
+	// private static Destination getDestinationOpenMQ(String destination)
+	// throws JMSException {
+	// return new Topic(destination);
+	// }
 
 	// private static Destination getDestinationActiveMQ(String destination)
 	// throws JMSException {
@@ -46,15 +56,26 @@ public class Configuration {
 	// }
 
 	public static Connection getConnection() throws JMSException {
-		return getConnectionOpenMQ();
+		return getConnectionHornetQ();
+		// return getConnectionOpenMQ();
 		// return getConnectionActiveMQ();
 	}
 
-	private static Connection getConnectionOpenMQ() throws JMSException {
-		ConnectionFactory factory = new ConnectionFactory();
-		Connection connection = factory.createTopicConnection();
-		return connection;
+	private static Connection getConnectionHornetQ() throws JMSException {
+		TransportConfiguration transportConfiguration = new TransportConfiguration(
+				NettyConnectorFactory.class.getName());
+		HornetQConnectionFactory factory = HornetQJMSClient
+				.createConnectionFactoryWithoutHA(JMSFactoryType.TOPIC_CF,
+						transportConfiguration);
+		return factory.createConnection(Configuration.user,
+				Configuration.password);
 	}
+
+	// private static Connection getConnectionOpenMQ() throws JMSException {
+	// ConnectionFactory factory = new ConnectionFactory();
+	// Connection connection = factory.createTopicConnection();
+	// return connection;
+	// }
 
 	// private static Connection getConnectionActiveMQ() throws JMSException {
 	// ConnectionFactoryImpl factory = new ConnectionFactoryImpl(
@@ -68,11 +89,12 @@ public class Configuration {
 	public static MessageConsumer createConsumer(Session session,
 			String listenerID, javax.jms.Topic dest, String filter)
 			throws JMSException {
-		return createConsumerOpenMQ(session, listenerID, dest, filter);
+		return createConsumerHornetQ(session, listenerID, dest, filter);
+		// return createConsumerOpenMQ(session, listenerID, dest, filter);
 		// return createConsumerActiveMQ(session, listenerID, dest, filter);
 	}
 
-	private static MessageConsumer createConsumerOpenMQ(Session session,
+	private static MessageConsumer createConsumerHornetQ(Session session,
 			String listenerID, javax.jms.Topic dest, String filter)
 			throws JMSException {
 		MessageConsumer consumer;
@@ -84,6 +106,19 @@ public class Configuration {
 		}
 		return consumer;
 	}
+
+	// private static MessageConsumer createConsumerOpenMQ(Session session,
+	// String listenerID, javax.jms.Topic dest, String filter)
+	// throws JMSException {
+	// MessageConsumer consumer;
+	// if (filter.equalsIgnoreCase("all")) {
+	// consumer = session.createDurableConsumer(dest, listenerID);
+	// } else {
+	// consumer = session.createDurableConsumer(dest, listenerID,
+	// "publisher = '" + filter + "'", false);
+	// }
+	// return consumer;
+	// }
 
 	// private static MessageConsumer createConsumerActiveMQ(Session session,
 	// String listenerID, javax.jms.Topic dest, String filter)
