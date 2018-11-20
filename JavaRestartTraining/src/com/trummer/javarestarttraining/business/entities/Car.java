@@ -6,9 +6,10 @@ public class Car {
 
 	private String manufacture;
 
-	public Car() {
-		power = 0;
-		manufacture = "Unknown";
+	public Car(final int power, final String manufacture) {
+		super();
+		this.power = power;
+		this.manufacture = manufacture;
 	}
 
 	public String getManufacture() {
@@ -19,11 +20,11 @@ public class Car {
 		return power;
 	}
 
-	public void setManufacture(String manufacture) {
+	public void setManufacture(final String manufacture) {
 		this.manufacture = manufacture;
 	}
 
-	public void setPower(int power) {
+	public void setPower(final int power) {
 		this.power = power;
 	}
 
