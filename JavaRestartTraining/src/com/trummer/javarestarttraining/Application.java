@@ -29,6 +29,8 @@ public class Application {
 		}
 		myFirstCar.showCar();
 
+		FileWriter.readFile();
+
 	}
 
 	private int myInt;
