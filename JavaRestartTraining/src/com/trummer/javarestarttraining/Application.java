@@ -17,7 +17,7 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		// some changes on PC
+		// some changes on PC - ups
 		System.out.println("Hello iMac!");
 		final PoJo pojo = new PoJoChild(32);
 		pojo.setMyInt(45);
