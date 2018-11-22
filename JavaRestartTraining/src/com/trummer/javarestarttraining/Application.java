@@ -5,6 +5,7 @@ package com.trummer.javarestarttraining;
 
 import com.trummer.javarestarttraining.business.entities.Car;
 import com.trummer.javarestarttraining.business.entities.PoJo;
+import com.trummer.javarestarttraining.business.entities.PoJoChild;
 
 /**
  * @author chris
@@ -17,7 +18,7 @@ public class Application {
 	 */
 	public static void main(final String[] args) {
 		System.out.println("Hello iMac!");
-		final PoJo pojo = new PoJo();
+		final PoJo pojo = new PoJoChild(32);
 		pojo.setMyInt(45);
 
 		final Car myFirstCar = new Car(100, "Opel");
