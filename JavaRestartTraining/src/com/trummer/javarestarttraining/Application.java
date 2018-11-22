@@ -8,7 +8,7 @@ import com.trummer.javarestarttraining.business.entities.PoJo;
 import com.trummer.javarestarttraining.business.entities.PoJoChild;
 
 /**
- * @author chris
+ * @author Christian Trummer
  *
  */
 public class Application {
