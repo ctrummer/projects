@@ -33,9 +33,20 @@ public class FileWriter {
 	}
 
 	public static void readFile() {
+		String current = System.getProperty("user.home");
+		
+		try {
+			current = new java.io.File( "." ).getCanonicalPath();
+			System.out.println("Current directory: " + current);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException (e1);
+		}
 
 		final FileSystem fs = FileSystems.getDefault();
-		final Path p = fs.getPath("C:\\Users\\chris\\Documents\\temp\\MyText.txt"); // C:\Users\chris\Documents\temp
+		System.out.println(System.getProperty("user.home"));
+		final Path p = fs.getPath(current, "resources", "MyText.txt");
+//		final Path p = fs.getPath("C:\\Users\\chris\\Documents\\temp\\MyText.txt"); // C:\Users\chris\Documents\temp
 		writePathInfoToConsole(p);
 		try {
 			writeFileContentToConsole(p);
