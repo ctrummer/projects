@@ -4,6 +4,7 @@
 package com.trummer.javarestarttraining;
 
 import com.trummer.javarestarttraining.business.entities.Car;
+import com.trummer.javarestarttraining.business.entities.Empty;
 import com.trummer.javarestarttraining.business.entities.PoJo;
 import com.trummer.javarestarttraining.business.entities.PoJoChild;
 
@@ -17,6 +18,9 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
+
+		final Empty empty = new Empty();
+		empty.showEmpty();
 
 		System.out.println("Hello iMac!");
 		final PoJo pojo = new PoJoChild(32);
