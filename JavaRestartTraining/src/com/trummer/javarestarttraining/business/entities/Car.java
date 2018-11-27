@@ -1,6 +1,11 @@
 package com.trummer.javarestarttraining.business.entities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Car {
+
+	private static final Logger logger = LogManager.getLogger(Car.class);
 
 	private int power;
 
@@ -10,6 +15,12 @@ public class Car {
 		super();
 		this.power = power;
 		this.manufacture = manufacture;
+		logger.error("New Car - Error!!!!");
+		logger.warn("New Car - Warn!!!!");
+		logger.info("New Car - Info!!!!");
+		logger.debug("New Car - Debug!!!!");
+		logger.trace("New Car - Trace!!!!");
+
 	}
 
 	public String getManufacture() {
