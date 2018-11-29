@@ -26,7 +26,7 @@ public class FileWriter {
 
 		final FileSystem fs = FileSystems.getDefault();
 		System.out.println(System.getProperty("user.home"));
-		final Path p = fs.getPath(current, "resources", "MyText.txt");
+		final Path p = fs.getPath(current, "target", "classes", "MyText.txt");
 //		final Path p = fs.getPath("C:\\Users\\chris\\Documents\\temp\\MyText.txt"); // C:\Users\chris\Documents\temp
 		writePathInfoToConsole(p);
 		try {
