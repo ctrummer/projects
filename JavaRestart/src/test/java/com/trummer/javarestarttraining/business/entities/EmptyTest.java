@@ -1,26 +1,41 @@
 package com.trummer.javarestarttraining.business.entities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EmptyTest {
 
-	@BeforeAll
-	protected static void setUpBeforeClass() throws Exception {
-	}
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-	@AfterAll
-	protected static void tearDownAfterClass() throws Exception {
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+	private final PrintStream originalOut = System.out;
+	private final PrintStream originalErr = System.err;
+
+	@AfterEach
+	public void restoreStreams() {
+		System.setOut(originalOut);
+		System.setErr(originalErr);
 	}
 
 	@BeforeEach
-	protected void setUp() throws Exception {
+	public void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
+		System.setErr(new PrintStream(errContent));
 	}
 
-	@AfterEach
-	protected void tearDown() throws Exception {
+	@Test
+	public void showEmpty() {
+		final Empty empty = new Empty();
+		empty.showEmpty();
+		assertEquals("Integer == 0 String ==  null\r\n", outContent.toString());
 	}
 
 }
