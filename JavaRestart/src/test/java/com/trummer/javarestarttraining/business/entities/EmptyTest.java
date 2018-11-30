@@ -36,6 +36,7 @@ public class EmptyTest {
 		final Empty empty = new Empty();
 		empty.showEmpty();
 		assertEquals("Integer == 0 String ==  null\r\n", outContent.toString());
+
 	}
 
 }
