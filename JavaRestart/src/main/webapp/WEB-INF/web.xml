@@ -13,6 +13,17 @@
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
   
+ 	 <servlet>
+	    <servlet-name>Faces</servlet-name>
+	    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+	</servlet>
+		<servlet-mapping>
+	    <servlet-name>Faces</servlet-name>
+	    <url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+  
+  
   
   <!-- 
   <display-name>JavaRestart</display-name>
