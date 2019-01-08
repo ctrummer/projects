@@ -10,7 +10,7 @@ public class HelloBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private String name = "Christian Trummer";
 
 	public String getName() {
 		return name;

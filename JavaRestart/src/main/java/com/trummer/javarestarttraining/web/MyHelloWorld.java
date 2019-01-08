@@ -10,6 +10,11 @@ import javax.servlet.ServletResponse;
 
 public class MyHelloWorld extends GenericServlet {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 71493582493050630L;
+
 	@Override
 	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
