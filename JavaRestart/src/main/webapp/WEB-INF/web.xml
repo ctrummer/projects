@@ -3,13 +3,13 @@
   
  	<display-name>Simple Servlet Application</display-name>
 	<servlet>
-		<servlet-name>MyHelloWorld</servlet-name>
-		<servlet-class>com.trummer.javarestarttraining.web.MyHelloWorld</servlet-class>
+		<servlet-name>MyFirstServlet</servlet-name>
+		<servlet-class>com.trummer.javarestarttraining.web.MyFirstServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>MyHelloWorld</servlet-name>
+		<servlet-name>MyFirstServlet</servlet-name>
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
   
